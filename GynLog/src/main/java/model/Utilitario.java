@@ -26,7 +26,8 @@ public class Utilitario extends Veiculo {
     public void setCapacidadeCargakg(double capacidadeCargakg) {
         this.capacidadeCargakg = capacidadeCargakg;
     }
-
+    
+    // não entendi isso daqui
     @Override
     public String toString() { //poliformismo//
         return "Caminhão: " + getmodelo() + 
