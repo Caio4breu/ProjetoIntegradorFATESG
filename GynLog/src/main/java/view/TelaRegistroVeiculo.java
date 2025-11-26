@@ -52,6 +52,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
         btnGroupEscolhaClasse = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTFVeiculoID = new javax.swing.JTextField();
         jTFPlaca = new javax.swing.JTextField();
@@ -67,12 +68,17 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
         jTFCargaKg = new javax.swing.JTextField();
         jTFCarga = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("GynLog");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Registro de novo Veículo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,13 +87,17 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -141,6 +151,8 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
 
         jButton1.setText("Veja a frota completa");
 
+        jButton2.setText("Registrar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -159,6 +171,8 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                             .addComponent(jTFCargaKg, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jTFCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -205,7 +219,8 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnClasseCaminhao)
                     .addComponent(jTFCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
 
@@ -234,9 +249,9 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFVeiculoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFVeiculoIDActionPerformed
-        String idTexto = jTFVeiculoID.getText().trim();
+        String idVeiculo = jTFVeiculoID.getText().trim();
         
-        if (idTexto.isEmpty() || idTexto.equals("Digite o ID do veículo...")) {
+        if (idVeiculo.isEmpty() || idVeiculo.equals("Digite o ID do veículo...")) {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "Preencha o ID do veículo.",
                 "Aviso",
@@ -246,9 +261,9 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
             return;
         }
         try {
-            int id = Integer.parseInt(idTexto);
+            int id = Integer.parseInt(idVeiculo); // recebendo a variavel (ID VEICULO)
 
-            // SALVANDO NO ARQUIVO
+            // Salvando variaveis///
             Registro.salvarLinha("ID do veículo registrado: " + id);
 
             javax.swing.JOptionPane.showMessageDialog(this,
@@ -325,8 +340,10 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
     private javax.swing.JToggleButton jBtnClasseMoto;
     private javax.swing.JToggleButton jBtnClasseUtilitario;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRBbtnDisponibilidade;

@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 public class Registro {
     private static final String nomeArquivo = "historicoUser.txt";
     private static final String arquivoVeiculo = "historicoVeiculo.txt";
+    private static final String arquivoMovimento = "historicoMovimentacao.txt";
+    private static final String arquivoTipoDespesa = "historicoDespesa.txt";
     
     public static String lerArquivo() {
         StringBuilder conteudo = new StringBuilder();
