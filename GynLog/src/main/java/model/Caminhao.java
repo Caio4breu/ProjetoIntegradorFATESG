@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
@@ -27,12 +23,12 @@ public class Caminhao extends Veiculo {
         this.capacidadeCarga = capacidadeCarga;
     }
 
-    @Override
-    public String toString() { //poliformismo//
-        return "Caminhão: " + getmodelo() + 
-               " - ID: " + getIdVeiculo() +
-               " - Placa: " + getplaca() + 
-               " - Ano: " + getanoFabricacao() + 
-               " - Carga Máx: " + capacidadeCarga + " ton.";
-    }
+    //    @Override
+    //    public String toString() { //poliformismo//
+    //        return "Caminhão: " + getmodelo() + 
+    //               " - ID: " + getIdVeiculo() +
+    //               " - Placa: " + getplaca() + 
+    //               " - Ano: " + getanoFabricacao() + 
+    //               " - Carga Máx: " + capacidadeCarga + " ton.";
+    //    }
 }
