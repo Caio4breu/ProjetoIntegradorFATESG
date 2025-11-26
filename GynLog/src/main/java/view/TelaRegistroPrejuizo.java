@@ -35,14 +35,12 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
     }
 
     private void adicionarPlaceholders() {
-        aplicarPlaceholder(jTFVeiculoID, "Digite o ID do veículo...");
-        aplicarPlaceholder(jTFPlaca, "Placa do veículo");
-        aplicarPlaceholder(jTFMarca, "Marca do veículo");
-        aplicarPlaceholder(jTFModelo, "Modelo do veículo");
-        aplicarPlaceholder(jTFAnoFabric, "Ano de fabricação");
-        aplicarPlaceholder(jTFCilindrada, "Qtd Cilindradas");
-        aplicarPlaceholder(jTFCargaKg, "Peso da Carga");
-        aplicarPlaceholder(jTFCarga, "Peso da Carga");
+        aplicarPlaceholder(jTFEncontrarID, "Digite o ID do veículo");
+        aplicarPlaceholder(jTFEncontrarPlaca, "Placa do veículo");
+        aplicarPlaceholder(jTFEncontrarData, "Data do registro");
+        aplicarPlaceholder(jTFEncontrarMarca, "Marca do veículo");
+        aplicarPlaceholder(jTFEncontrarModelo, "Marca do veículo");
+        aplicarPlaceholder(jTFEncontrarIdRegistro, "ID do Registro");
     }
     
     @SuppressWarnings("unchecked")
@@ -125,16 +123,46 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
         jLabel2.setText("Relatório de Aravias para Classificação de Danos em Veículos Registrados");
 
         jTFEncontrarID.setText("Veículo Id");
+        jTFEncontrarID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEncontrarIDActionPerformed(evt);
+            }
+        });
 
         jTFEncontrarPlaca.setText("Placa");
+        jTFEncontrarPlaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEncontrarPlacaActionPerformed(evt);
+            }
+        });
 
         jTFEncontrarData.setText("Data");
+        jTFEncontrarData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEncontrarDataActionPerformed(evt);
+            }
+        });
 
         jTFEncontrarIdRegistro.setText("Id Registro");
+        jTFEncontrarIdRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEncontrarIdRegistroActionPerformed(evt);
+            }
+        });
 
         jTFEncontrarModelo.setText("Modelo");
+        jTFEncontrarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEncontrarModeloActionPerformed(evt);
+            }
+        });
 
         jTFEncontrarMarca.setText("Marca");
+        jTFEncontrarMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEncontrarMarcaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Automóveis, caminhonetas, caminhonetes e utilitários com estrutura em monobloco");
@@ -151,7 +179,103 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("DESCRIÇÃO");
 
+        jTFComponenteQuebrado1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFComponenteQuebrado1ActionPerformed(evt);
+            }
+        });
+
+        jTFValor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValor1ActionPerformed(evt);
+            }
+        });
+
+        jTFDescricao1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDescricao1ActionPerformed(evt);
+            }
+        });
+
+        jTFComponenteQuebrado2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFComponenteQuebrado2ActionPerformed(evt);
+            }
+        });
+
+        jTFValor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValor2ActionPerformed(evt);
+            }
+        });
+
+        jTFDescricao2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDescricao2ActionPerformed(evt);
+            }
+        });
+
+        jTFValor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValor3ActionPerformed(evt);
+            }
+        });
+
+        jTFComponenteQuebrado3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFComponenteQuebrado3ActionPerformed(evt);
+            }
+        });
+
+        jTFDescricao3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDescricao3ActionPerformed(evt);
+            }
+        });
+
+        jTFComponenteQuebrado4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFComponenteQuebrado4ActionPerformed(evt);
+            }
+        });
+
+        jTFValor4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFValor4ActionPerformed(evt);
+            }
+        });
+
+        jTFDescricao4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDescricao4ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Enviar Registro");
+
+        jTFData4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFData4ActionPerformed(evt);
+            }
+        });
+
+        jTFData3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFData3ActionPerformed(evt);
+            }
+        });
+
+        jTFData2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFData2ActionPerformed(evt);
+            }
+        });
+
+        jTFData1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFData1ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("DATA");
@@ -216,12 +340,12 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel10))
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFValor1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFValor3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFValor2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFValor4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTFValor2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                                    .addComponent(jTFValor1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFValor3)
+                                    .addComponent(jTFValor4)))
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,6 +461,94 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTFComponenteQuebrado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFComponenteQuebrado1ActionPerformed
+
+    private void jTFComponenteQuebrado2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFComponenteQuebrado2ActionPerformed
+
+    private void jTFComponenteQuebrado3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFComponenteQuebrado3ActionPerformed
+
+    private void jTFComponenteQuebrado4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFComponenteQuebrado4ActionPerformed
+
+    private void jTFValor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValor1ActionPerformed
+
+    private void jTFValor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValor2ActionPerformed
+
+    private void jTFValor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValor3ActionPerformed
+
+    private void jTFValor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFValor4ActionPerformed
+
+    private void jTFDescricao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDescricao1ActionPerformed
+
+    private void jTFDescricao2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDescricao2ActionPerformed
+
+    private void jTFDescricao3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDescricao3ActionPerformed
+
+    private void jTFDescricao4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDescricao4ActionPerformed
+
+    private void jTFData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFData1ActionPerformed
+
+    private void jTFData2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFData2ActionPerformed
+
+    private void jTFData3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFData3ActionPerformed
+
+    private void jTFData4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFData4ActionPerformed
+
+    private void jTFEncontrarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEncontrarIDActionPerformed
+
+    private void jTFEncontrarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarPlacaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEncontrarPlacaActionPerformed
+
+    private void jTFEncontrarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEncontrarDataActionPerformed
+
+    private void jTFEncontrarMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEncontrarMarcaActionPerformed
+
+    private void jTFEncontrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEncontrarModeloActionPerformed
+
+    private void jTFEncontrarIdRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarIdRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEncontrarIdRegistroActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
