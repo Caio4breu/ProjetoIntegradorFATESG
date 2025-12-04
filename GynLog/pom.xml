@@ -10,4 +10,11 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>grupoaravia.gynlog.GynLog</exec.mainClass>
     </properties>
+      <dependencies>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+            <version>5.2.5</version>
+        </dependency>
+    </dependencies>
 </project>

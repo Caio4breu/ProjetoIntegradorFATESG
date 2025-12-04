@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-import util.Registro;
 
 public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 
