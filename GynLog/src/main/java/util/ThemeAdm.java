@@ -129,7 +129,7 @@ return temaAtual == Theme.LIGHT ? LIGHT_BUTTON_TEXT : DARK_BUTTON_TEXT;
                 p.setBackground(getBackgroundColor());
                 return;
             }
-            
+                
 //            if (p.getParent() instanceof javax.swing.JRootPane) {
 //                // Painel principal (fundo) - usa cor de background
 //                p.setBackground(getBackgroundColor());
