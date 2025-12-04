@@ -20,6 +20,7 @@ public class TelaSlash extends javax.swing.JFrame {
         
         configurarJanela();
         iniciarCarregamento();
+        ThemeAdm.addRememberOnClose(this);
         ThemeAdm.applyTheme(this);
     }
 
