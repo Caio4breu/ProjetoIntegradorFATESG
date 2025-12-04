@@ -9,6 +9,7 @@ public class TelaInicio extends javax.swing.JFrame {
     public TelaInicio() {
         initComponents();
         ThemeAdm.applyTheme(this);
+        setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")

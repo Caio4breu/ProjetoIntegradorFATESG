@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import model.Veiculo;
 
@@ -71,13 +72,30 @@ public class ArquivoTXT_Veiculo {
         if (Lista.isEmpty()) {
             return 100000;
         }
-        // Encontra o maior ID existente -------------------------------------------------------------------------------------------------
-        int maiorId = 100000;
-        for (Veiculo v : Lista) {
-            if (v.getIdVeiculo() > maiorId) {
-                maiorId = v.getIdVeiculo();
+        
+        // Define o ID inicial do sistema
+        int idInicial = 100000;
+
+        HashSet<Integer> idsExistentes = new HashSet<>();
+        int maiorId = idInicial;
+        
+        for (Veiculo veiculo : Lista) {
+            int id = veiculo.getIdVeiculo();
+            idsExistentes.add(id);
+            if (id > maiorId) {
+                maiorId = id;
             }
         }
+        
+        // Buscando por ids vagos na sequencia
+        for (int i = idInicial; i <= maiorId; i++) {
+            if (!idsExistentes.contains(i)) {
+                // Encontrou um ID vago!
+                return i;
+            }
+        }
+
+        
         return maiorId + 1;
     }
     
