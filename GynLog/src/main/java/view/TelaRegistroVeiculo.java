@@ -19,6 +19,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
         adicionarValidacoesFoco();
         configurarComboBoxDisponibilidade();
         configurarCampoIdAutomatico();
+        permitirApenasNumeros(jTFAnoFabric);
         setLocationRelativeTo(null);
         ThemeAdm.applyTheme(this);
         ThemeAdm.addRememberOnClose(this);
@@ -31,247 +32,247 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
     // Inicializa Marcas e Modelos (A completar) -------------------------------
     private void inicializarMarcasModelos(){
         // Volkswagen ----------------------------------------------------------
-    marcasModelos.put("Volkswagen", Arrays.asList(
-            "Delivery 4.150", // caminhão leve
-            "Delivery 11.180", // caminhão leve
-            "Constellation 24.280", // caminhão pesado
-            "Constellation 33.460", // caminhão extrapesado
-            "Worker 13.180", // caminhão
-            "Worker 17.210", // caminhão
-            "Amarok", // caminhonete
-            "Amarok V6", // caminhonete
-            "Kombi Furgão", // van
-            "Volksbus 9-160", // ônibus urbano
-            "Volksbus 17-230", // ônibus rodoviário
-            "Crafter 2.0", // van
-            "Crafter Truck", // caminhão leve
-            "Transporter T6", // van
-            "Transporter Chassis" // caminhão leve
-    ));
+        marcasModelos.put("Volkswagen", Arrays.asList(
+                "Delivery 4.150", // caminhão leve
+                "Delivery 11.180", // caminhão leve
+                "Constellation 24.280", // caminhão pesado
+                "Constellation 33.460", // caminhão extrapesado
+                "Worker 13.180", // caminhão
+                "Worker 17.210", // caminhão
+                "Amarok", // caminhonete
+                "Amarok V6", // caminhonete
+                "Kombi Furgão", // van
+                "Volksbus 9-160", // ônibus urbano
+                "Volksbus 17-230", // ônibus rodoviário
+                "Crafter 2.0", // van
+                "Crafter Truck", // caminhão leve
+                "Transporter T6", // van
+                "Transporter Chassis" // caminhão leve
+        ));
 
-    // Mercedes-Benz -----------------------------------------------------------
-    marcasModelos.put("Mercedes-Benz", Arrays.asList(
-            "Accelo 815", // caminhão leve
-            "Accelo 1016", // caminhão leve
-            "Atego 1719", // caminhão médio
-            "Atego 2426", // caminhão pesado
-            "Actros 2651", // caminhão extrapesado
-            "Actros 2553", // caminhão extrapesado
-            "Sprinter 314 CDI", // van
-            "Sprinter 415 CDI", // van
-            "Sprinter 515 CDI", // van
-            "Sprinter Street", // van
-            "OF-1519", // ônibus urbano
-            "OH-1622", // ônibus rodoviário
-            "O-500 RSD", // ônibus rodoviário
-            "X-Class", // caminhonete
-            "G-Class Pickup (custom)" // caminhonete
-    ));
+        // Mercedes-Benz -----------------------------------------------------------
+        marcasModelos.put("Mercedes-Benz", Arrays.asList(
+                "Accelo 815", // caminhão leve
+                "Accelo 1016", // caminhão leve
+                "Atego 1719", // caminhão médio
+                "Atego 2426", // caminhão pesado
+                "Actros 2651", // caminhão extrapesado
+                "Actros 2553", // caminhão extrapesado
+                "Sprinter 314 CDI", // van
+                "Sprinter 415 CDI", // van
+                "Sprinter 515 CDI", // van
+                "Sprinter Street", // van
+                "OF-1519", // ônibus urbano
+                "OH-1622", // ônibus rodoviário
+                "O-500 RSD", // ônibus rodoviário
+                "X-Class", // caminhonete
+                "G-Class Pickup (custom)" // caminhonete
+        ));
 
-    // Ford --------------------------------------------------------------------
-    marcasModelos.put("Ford", Arrays.asList(
-            "F-250", // caminhonete pesada
-            "F-350", // caminhonete pesada
-            "F-4000", // caminhão leve
-            "F-4000 4x4", // caminhão leve
-            "Cargo 1119", // caminhão leve
-            "Cargo 1519", // caminhão médio
-            "Cargo 2429", // caminhão pesado
-            "Cargo 3131", // caminhão pesado
-            "Transit Van", // van
-            "Transit Furgão", // van
-            "Transit Chassi", // caminhão leve
-            "Torino Custom" // ônibus urbano (modificado)
-    ));
+        // Ford --------------------------------------------------------------------
+        marcasModelos.put("Ford", Arrays.asList(
+                "F-250", // caminhonete pesada
+                "F-350", // caminhonete pesada
+                "F-4000", // caminhão leve
+                "F-4000 4x4", // caminhão leve
+                "Cargo 1119", // caminhão leve
+                "Cargo 1519", // caminhão médio
+                "Cargo 2429", // caminhão pesado
+                "Cargo 3131", // caminhão pesado
+                "Transit Van", // van
+                "Transit Furgão", // van
+                "Transit Chassi", // caminhão leve
+                "Torino Custom" // ônibus urbano (modificado)
+        ));
 
-    // Chevrolet ---------------------------------------------------------------
-    marcasModelos.put("Chevrolet", Arrays.asList(
-            "S10", // caminhonete
-            "S10 High Country", // caminhonete
-            "Silverado 1500", // caminhonete
-            "Silverado 2500 HD", // caminhonete pesada
-            "Silverado 3500 HD", // caminhonete pesada
-            "Chevy Van G20", // van
-            "Express 2500", // van
-            "Express 3500 Cutaway" // caminhão leve
-    ));
+        // Chevrolet ---------------------------------------------------------------
+        marcasModelos.put("Chevrolet", Arrays.asList(
+                "S10", // caminhonete
+                "S10 High Country", // caminhonete
+                "Silverado 1500", // caminhonete
+                "Silverado 2500 HD", // caminhonete pesada
+                "Silverado 3500 HD", // caminhonete pesada
+                "Chevy Van G20", // van
+                "Express 2500", // van
+                "Express 3500 Cutaway" // caminhão leve
+        ));
 
-    // Fiat --------------------------------------------------------------------
-    marcasModelos.put("Fiat", Arrays.asList(
-            "Ducato Furgão", // van
-            "Ducato Minibus", // van
-            "Ducato Cargo Maxi", // van
-            "Scudo", // van
-            "Talento", // van
-            "Toro", // caminhonete leve
-            "Fullback" // caminhonete
-    ));
+        // Fiat --------------------------------------------------------------------
+        marcasModelos.put("Fiat", Arrays.asList(
+                "Ducato Furgão", // van
+                "Ducato Minibus", // van
+                "Ducato Cargo Maxi", // van
+                "Scudo", // van
+                "Talento", // van
+                "Toro", // caminhonete leve
+                "Fullback" // caminhonete
+        ));
 
-    // Iveco -------------------------------------------------------------------
-    marcasModelos.put("Iveco", Arrays.asList(
-            "Daily 35-150", // van
-            "Daily 45-170", // caminhão leve
-            "Daily Minibus", // van
-            "Tector 11-190", // caminhão médio
-            "Tector 24-300", // caminhão pesado
-            "Hi-Way 480", // caminhão extrapesado
-            "Hi-Road 440", // caminhão extrapesado
-            "Hi-Way 560", // caminhão extrapesado
-            "S-Way 570", // caminhão extrapesado
-            "CityClass", // ônibus urbano
-            "Popstar" // micro-ônibus
-    ));
+        // Iveco -------------------------------------------------------------------
+        marcasModelos.put("Iveco", Arrays.asList(
+                "Daily 35-150", // van
+                "Daily 45-170", // caminhão leve
+                "Daily Minibus", // van
+                "Tector 11-190", // caminhão médio
+                "Tector 24-300", // caminhão pesado
+                "Hi-Way 480", // caminhão extrapesado
+                "Hi-Road 440", // caminhão extrapesado
+                "Hi-Way 560", // caminhão extrapesado
+                "S-Way 570", // caminhão extrapesado
+                "CityClass", // ônibus urbano
+                "Popstar" // micro-ônibus
+        ));
 
-    // Volvo -------------------------------------------------------------------
-    marcasModelos.put("Volvo", Arrays.asList(
-            "FH 460", // caminhão extrapesado
-            "FH 540", // caminhão extrapesado
-            "FH 500", // caminhão extrapesado
-            "FM 420", // caminhão pesado
-            "FMX 540", // caminhão fora de estrada
-            "B270F", // ônibus urbano
-            "B310R", // ônibus rodoviário
-            "B450R" // ônibus rodoviário
-    ));
+        // Volvo -------------------------------------------------------------------
+        marcasModelos.put("Volvo", Arrays.asList(
+                "FH 460", // caminhão extrapesado
+                "FH 540", // caminhão extrapesado
+                "FH 500", // caminhão extrapesado
+                "FM 420", // caminhão pesado
+                "FMX 540", // caminhão fora de estrada
+                "B270F", // ônibus urbano
+                "B310R", // ônibus rodoviário
+                "B450R" // ônibus rodoviário
+        ));
 
-    // Scania ------------------------------------------------------------------
-    marcasModelos.put("Scania", Arrays.asList(
-            "R 450", // caminhão extrapesado
-            "R 500", // caminhão extrapesado
-            "S 500", // caminhão extrapesado
-            "S 620", // caminhão extrapesado
-            "P 360", // caminhão médio
-            "P 280", // caminhão leve
-            "K 310 IB", // ônibus rodoviário
-            "F 280", // ônibus urbano
-            "K 400 6x2" // ônibus rodoviário
-    ));
+        // Scania ------------------------------------------------------------------
+        marcasModelos.put("Scania", Arrays.asList(
+                "R 450", // caminhão extrapesado
+                "R 500", // caminhão extrapesado
+                "S 500", // caminhão extrapesado
+                "S 620", // caminhão extrapesado
+                "P 360", // caminhão médio
+                "P 280", // caminhão leve
+                "K 310 IB", // ônibus rodoviário
+                "F 280", // ônibus urbano
+                "K 400 6x2" // ônibus rodoviário
+        ));
 
-    // MAN ---------------------------------------------------------------------
-    marcasModelos.put("MAN", Arrays.asList(
-            "TGX 28.440", // caminhão extrapesado
-            "TGX 29.480", // caminhão extrapesado
-            "TGS 26.440", // caminhão pesado
-            "TGM 26.290", // caminhão médio
-            "TGL 12.250", // caminhão leve
-            "Lion's Coach", // ônibus rodoviário
-            "Lion's City" // ônibus urbano
-    ));
+        // MAN ---------------------------------------------------------------------
+        marcasModelos.put("MAN", Arrays.asList(
+                "TGX 28.440", // caminhão extrapesado
+                "TGX 29.480", // caminhão extrapesado
+                "TGS 26.440", // caminhão pesado
+                "TGM 26.290", // caminhão médio
+                "TGL 12.250", // caminhão leve
+                "Lion's Coach", // ônibus rodoviário
+                "Lion's City" // ônibus urbano
+        ));
 
-    // Renault -----------------------------------------------------------------
-    marcasModelos.put("Renault", Arrays.asList(
-            "Master Furgão", // van
-            "Master Minibus", // van
-            "Master Chassi", // caminhão leve
-            "Trafic", // van
-            "Alaskan" // caminhonete
-    ));
+        // Renault -----------------------------------------------------------------
+        marcasModelos.put("Renault", Arrays.asList(
+                "Master Furgão", // van
+                "Master Minibus", // van
+                "Master Chassi", // caminhão leve
+                "Trafic", // van
+                "Alaskan" // caminhonete
+        ));
 
-    // Peugeot -----------------------------------------------------------------
-    marcasModelos.put("Peugeot", Arrays.asList(
-            "Boxer Cargo", // van
-            "Boxer Minibus", // van
-            "Expert", // van
-            "Rifter", // van
-            "Landtrek" // caminhonete
-    ));
+        // Peugeot -----------------------------------------------------------------
+        marcasModelos.put("Peugeot", Arrays.asList(
+                "Boxer Cargo", // van
+                "Boxer Minibus", // van
+                "Expert", // van
+                "Rifter", // van
+                "Landtrek" // caminhonete
+        ));
 
-    // Citroën -----------------------------------------------------------------
-    marcasModelos.put("Citroën", Arrays.asList(
-            "Jumper Furgão", // van
-            "Jumpy", // van
-            "Spacetourer", // van
-            "Berlingo Van" // van
-    ));
+        // Citroën -----------------------------------------------------------------
+        marcasModelos.put("Citroën", Arrays.asList(
+                "Jumper Furgão", // van
+                "Jumpy", // van
+                "Spacetourer", // van
+                "Berlingo Van" // van
+        ));
 
-    // Toyota ------------------------------------------------------------------
-    marcasModelos.put("Toyota", Arrays.asList(
-            "Hilux", // caminhonete
-            "Hilux CD SRX", // caminhonete
-            "Hilux Chassi", // caminhão leve
-            "Coaster", // micro-ônibus
-            "HiAce" // van
-    ));
+        // Toyota ------------------------------------------------------------------
+        marcasModelos.put("Toyota", Arrays.asList(
+                "Hilux", // caminhonete
+                "Hilux CD SRX", // caminhonete
+                "Hilux Chassi", // caminhão leve
+                "Coaster", // micro-ônibus
+                "HiAce" // van
+        ));
 
-    // Nissan ------------------------------------------------------------------
-    marcasModelos.put("Nissan", Arrays.asList(
-            "Frontier", // caminhonete
-            "Frontier XE", // caminhonete
-            "NV350 Urvan", // van
-            "Titan XD" // caminhonete pesada
-    ));
+        // Nissan ------------------------------------------------------------------
+        marcasModelos.put("Nissan", Arrays.asList(
+                "Frontier", // caminhonete
+                "Frontier XE", // caminhonete
+                "NV350 Urvan", // van
+                "Titan XD" // caminhonete pesada
+        ));
 
-    // Mitsubishi --------------------------------------------------------------
-    marcasModelos.put("Mitsubishi", Arrays.asList(
-            "L200 Triton", // caminhonete
-            "L200 Savana", // caminhonete
-            "L300", // van
-            "Fuso Canter 6.5", // caminhão leve
-            "Fuso Canter 8.5" // caminhão leve
-    ));
+        // Mitsubishi --------------------------------------------------------------
+        marcasModelos.put("Mitsubishi", Arrays.asList(
+                "L200 Triton", // caminhonete
+                "L200 Savana", // caminhonete
+                "L300", // van
+                "Fuso Canter 6.5", // caminhão leve
+                "Fuso Canter 8.5" // caminhão leve
+        ));
 
-    // Hyundai -----------------------------------------------------------------
-    marcasModelos.put("Hyundai", Arrays.asList(
-            "HR 2.5", // caminhão leve
-            "HD 80", // caminhão leve
-            "HD 160", // caminhão médio
-            "County", // micro-ônibus
-            "Solati" // van
-    ));
+        // Hyundai -----------------------------------------------------------------
+        marcasModelos.put("Hyundai", Arrays.asList(
+                "HR 2.5", // caminhão leve
+                "HD 80", // caminhão leve
+                "HD 160", // caminhão médio
+                "County", // micro-ônibus
+                "Solati" // van
+        ));
 
-    // Kia ---------------------------------------------------------------------
-    marcasModelos.put("Kia", Arrays.asList(
-            "Bongo K2500", // caminhão leve
-            "Bongo K2700", // caminhão leve
-            "Grand Carnival", // van
-            "Pregio", // van
-            "K9 Van" // van
-    ));
+        // Kia ---------------------------------------------------------------------
+        marcasModelos.put("Kia", Arrays.asList(
+                "Bongo K2500", // caminhão leve
+                "Bongo K2700", // caminhão leve
+                "Grand Carnival", // van
+                "Pregio", // van
+                "K9 Van" // van
+        ));
 
-    // Ram ---------------------------------------------------------------------
-    marcasModelos.put("Ram", Arrays.asList(
-            "Ram 1500", // caminhonete
-            "Ram 2500", // caminhonete pesada
-            "Ram 3500", // caminhonete extrapesada
-            "ProMaster Van", // van
-            "ProMaster Rapid" // van
-    ));
+        // Ram ---------------------------------------------------------------------
+        marcasModelos.put("Ram", Arrays.asList(
+                "Ram 1500", // caminhonete
+                "Ram 2500", // caminhonete pesada
+                "Ram 3500", // caminhonete extrapesada
+                "ProMaster Van", // van
+                "ProMaster Rapid" // van
+        ));
 
-    // Sprinter (custom brand) -------------------------------------------------
-    marcasModelos.put("Sprinter Custom", Arrays.asList(
-            "Sprinter Ambulância", // van
-            "Sprinter Escolar", // van
-            "Sprinter Executiva", // van
-            "Sprinter Fretamento" // van
-    ));
+        // Sprinter (custom brand) -------------------------------------------------
+        marcasModelos.put("Sprinter Custom", Arrays.asList(
+                "Sprinter Ambulância", // van
+                "Sprinter Escolar", // van
+                "Sprinter Executiva", // van
+                "Sprinter Fretamento" // van
+        ));
 
-    // Agrale ------------------------------------------------------------------
-    marcasModelos.put("Agrale", Arrays.asList(
-            "Marruá AM200", // caminhonete militar
-            "Marruá AM300", // caminhonete militar
-            "Agrale 8700", // ônibus
-            "Agrale 10500", // ônibus
-            "Agrale 14000 S" // caminhão médio
-    ));
+        // Agrale ------------------------------------------------------------------
+        marcasModelos.put("Agrale", Arrays.asList(
+                "Marruá AM200", // caminhonete militar
+                "Marruá AM300", // caminhonete militar
+                "Agrale 8700", // ônibus
+                "Agrale 10500", // ônibus
+                "Agrale 14000 S" // caminhão médio
+        ));
 
-    // Marcopolo (carroceria) --------------------------------------------------
-    marcasModelos.put("Marcopolo", Arrays.asList(
-            "Torino", // ônibus urbano
-            "Paradiso 1200", // ônibus rodoviário
-            "Paradiso 1800 DD", // ônibus rodoviário double deck
-            "Viaggio 1050", // ônibus rodoviário
-            "Senior Midi" // micro-ônibus
-    ));
+        // Marcopolo (carroceria) --------------------------------------------------
+        marcasModelos.put("Marcopolo", Arrays.asList(
+                "Torino", // ônibus urbano
+                "Paradiso 1200", // ônibus rodoviário
+                "Paradiso 1800 DD", // ônibus rodoviário double deck
+                "Viaggio 1050", // ônibus rodoviário
+                "Senior Midi" // micro-ônibus
+        ));
 
-    // Caio Induscar -----------------------------------------------------------
-    marcasModelos.put("Caio", Arrays.asList(
-            "Apache Vip", // ônibus urbano
-            "Millennium", // ônibus urbano
-            "Mondego", // ônibus rodoviário
-            "Foz Super", // micro-ônibus
-            "Tile Ade" // ônibus rodoviário
-    ));
-        //marcasModelos.put("Peugeot", Arrays.asList("")); modelo para mais marcas
+        // Caio Induscar -----------------------------------------------------------
+        marcasModelos.put("Caio", Arrays.asList(
+                "Apache Vip", // ônibus urbano
+                "Millennium", // ônibus urbano
+                "Mondego", // ônibus rodoviário
+                "Foz Super", // micro-ônibus
+                "Tile Ade" // ônibus rodoviário
+        ));
+            //marcasModelos.put("Peugeot", Arrays.asList("")); modelo para mais marcas
     }
     
     // Configuração de sugestão automatica -------------------------------------
@@ -434,7 +435,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        // Remove dropdown quando campo perde foco -----------------------------
+        // Remove dropdown quando campo perde foco ----------------------------------------------------------------------------
         campo.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -447,7 +448,20 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
         });
     }
     
-    // Metodos de Placeholder --------------------------------------------------
+    // Apenas recebe numeros inteiros no campo jTFAnoFabric ----------------------------------------------------------------
+    private void permitirApenasNumeros(javax.swing.JTextField campo) {
+        campo.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c) && c != java.awt.event.KeyEvent.VK_BACK_SPACE && c != java.awt.event.KeyEvent.VK_DELETE) {
+                    evt.consume(); // Bloqueia o caractere
+                }
+            }
+        });
+    }
+    
+    // Metodos de Placeholder -----------------------------------------------------------------------------------------------------------
     private void aplicarPlaceholder(javax.swing.JTextField campo, String placeholder) {
         final Color PLACEHOLDER_COLOR = ThemeAdm.getTheme() == ThemeAdm.Theme.LIGHT ? Color.GRAY : new Color(150, 150, 150);
         
@@ -699,10 +713,11 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 try {
                     int ano = Integer.parseInt(raw);
                     int anoAtual = java.time.Year.now().getValue();
+                    int anoLimite = anoAtual + 1;
                     
-                    if (ano < 1886 || ano > anoAtual) {
+                    if (ano < 1886 || ano > anoLimite) {
                         JOptionPane.showMessageDialog(TelaRegistroVeiculo.this,
-                                "Ano inválido. Aceito entre 1886 e " + anoAtual + ".", 
+                                "Ano inválido. Aceito entre 1886 e " + anoLimite + ".", 
                                 "Erro de Validação", 
                                 JOptionPane.ERROR_MESSAGE);
                         jTFAnoFabric.requestFocus();

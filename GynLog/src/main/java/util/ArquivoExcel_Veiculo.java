@@ -71,7 +71,7 @@ public class ArquivoExcel_Veiculo {
                 int anoFabricacao = (int) row.getCell(4).getNumericCellValue();
                 String StatusTxt = row.getCell(5).getStringCellValue();
                 
-                boolean StatusDoVeiculo = StatusTxt.equalsIgnoreCase("Disponivel");
+                boolean StatusDoVeiculo = StatusTxt.equalsIgnoreCase("Disponível") || StatusTxt.equalsIgnoreCase("Disponivel");
                 
                 Veiculo veiculo = new Veiculo(idVeiculo, placa, marca, modelo, anoFabricacao, StatusDoVeiculo);
                 Lista.add(veiculo);

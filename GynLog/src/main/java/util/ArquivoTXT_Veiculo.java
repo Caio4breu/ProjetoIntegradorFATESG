@@ -154,12 +154,12 @@ public class ArquivoTXT_Veiculo {
                     String marca = Partes[2];
                     String modelo = Partes[3];
                     int anoFABRICADO = Integer.parseInt(Partes[4]);
-                    boolean dispon = Partes[5].equalsIgnoreCase("Disponivel");
+                    boolean dispon = Partes[5].equalsIgnoreCase("Disponível") || Partes[5].equalsIgnoreCase("Disponivel");
                     Veiculo veiculo = new Veiculo(idVEICULO, placa, marca, modelo, anoFABRICADO, dispon);
                     Lista.add(veiculo);
                 } catch (NumberFormatException e) {
-                    System.err.println("⚠ Erro ao processar linha: " + Linha);
-            System.err.println("  Detalhes: " + e.getMessage());
+                    System.err.println("Erro ao processar linha: " + Linha);
+                    System.err.println("  Detalhes: " + e.getMessage());
                 }
             }
         } catch (IOException e) {

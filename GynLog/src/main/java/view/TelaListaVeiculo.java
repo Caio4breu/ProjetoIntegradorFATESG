@@ -37,7 +37,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
             jTDados.setDefaultEditor(Object.class, null);
             
             // Seleção de uma linha individual ---------------------------------
-            jTDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+            jTDados.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
     
     // Recebe dados do arquivo Veiculo.txt -------------------------------------
@@ -115,81 +115,179 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
     
     // Alteração de disponibilidade --------------------------------------------
     private void alternarDisponibilidadeVeiculo() {
-        int linhaSelecionada = jTDados.getSelectedRow();
-        
-        if(linhaSelecionada == -1) {
+        int[] linhasSelecionadas = jTDados.getSelectedRows();
+
+        if(linhasSelecionadas.length == 0) {
             JOptionPane.showMessageDialog(this,
-                "Por favor, selecione um veículo para alterar a disponibilidade.",
+                "Por favor, selecione um ou mais veículos para alterar a disponibilidade.",
                 "Nenhum veículo selecionado",
                 JOptionPane.WARNING_MESSAGE
             );
             return;
         }
+
         DefaultTableModel model = (DefaultTableModel) jTDados.getModel();
-        String idVeiculo = model.getValueAt(linhaSelecionada, 0).toString().trim();
-        String placa = model.getValueAt(linhaSelecionada, 1).toString().trim();
-        String marca = model.getValueAt(linhaSelecionada, 2).toString().trim();
-        String modeloVeiculo = model.getValueAt(linhaSelecionada, 3).toString().trim();
-        String statusAtual = model.getValueAt(linhaSelecionada, 5).toString().trim();
-        
-        // determina novo status
-        boolean estaDisponivel = statusAtual.equals("Disponível");
-        String novoStatus = estaDisponivel ? "Indisponível" : "Disponível";
-        
+
+        // Coleta informações dos veículos selecionados
+        ArrayList<String> idsParaAlterar = new ArrayList<>();
+        StringBuilder infoVeiculos = new StringBuilder();
+
+        // Verifica se há mistura de disponíveis e indisponíveis
+        int qtdDisponiveis = 0;
+        int qtdIndisponiveis = 0;
+
+        for (int i = 0; i < linhasSelecionadas.length; i++) {
+            int linha = linhasSelecionadas[i];
+            String idVeiculo = model.getValueAt(linha, 0).toString().trim();
+            String placa = model.getValueAt(linha, 1).toString().trim();
+            String marca = model.getValueAt(linha, 2).toString().trim();
+            String modeloVeiculo = model.getValueAt(linha, 3).toString().trim();
+            String statusAtual = model.getValueAt(linha, 5).toString().trim();
+
+            idsParaAlterar.add(idVeiculo);
+
+            if (statusAtual.equals("Disponível")) {
+                qtdDisponiveis++;
+            } else {
+                qtdIndisponiveis++;
+            }
+
+            infoVeiculos.append(String.format("  • %s %s (Placa: %s) - %s\n", 
+                                              marca, modeloVeiculo, placa, statusAtual));
+        }
+
+        // Define a ação baseada na seleção
+        String acao;
+        String novoStatus;
+        boolean tornarDisponivel;
+
+        if (linhasSelecionadas.length == 1) {
+            // Comportamento original para 1 veículo
+            String statusAtual = model.getValueAt(linhasSelecionadas[0], 5).toString().trim();
+            boolean estaDisponivel = statusAtual.equals("Disponível");
+            tornarDisponivel = !estaDisponivel;
+            novoStatus = estaDisponivel ? "Indisponível" : "Disponível";
+            acao = "alternar";
+        } else {
+            // Para múltiplos veículos, pergunta qual ação tomar
+            if (qtdDisponiveis > 0 && qtdIndisponiveis > 0) {
+                // Há mistura - pergunta o que fazer
+                Object[] opcoes = {"Marcar todos como Disponível", 
+                                  "Marcar todos como Indisponível", 
+                                  "Cancelar"};
+                int escolha = JOptionPane.showOptionDialog(this,
+                        String.format("Você selecionou %d veículos:\n" +
+                                     "- %d disponíveis\n" +
+                                     "- %d indisponíveis\n\n" +
+                                     "O que deseja fazer?",
+                                     linhasSelecionadas.length, qtdDisponiveis, qtdIndisponiveis),
+                        "Escolha a ação",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoes,
+                        opcoes[0]);
+
+                if (escolha == 0) {
+                    tornarDisponivel = true;
+                    novoStatus = "Disponível";
+                    acao = "marcar como disponível";
+                } else if (escolha == 1) {
+                    tornarDisponivel = false;
+                    novoStatus = "Indisponível";
+                    acao = "marcar como indisponível";
+                } else {
+                    return; // Cancelou
+                }
+            } else if (qtdDisponiveis > 0) {
+                // Todos disponíveis - marcar como indisponível
+                tornarDisponivel = false;
+                novoStatus = "Indisponível";
+                acao = "marcar como indisponível";
+            } else {
+                // Todos indisponíveis - marcar como disponível
+                tornarDisponivel = true;
+                novoStatus = "Disponível";
+                acao = "marcar como disponível";
+            }
+        }
+
         // Confirmação com o usuário
+        String mensagem;
+        if (linhasSelecionadas.length == 1) {
+            mensagem = String.format("Deseja alterar a disponibilidade do veículo?\n\n%s\nNovo status: %s",
+                                    infoVeiculos.toString(), novoStatus);
+        } else {
+            mensagem = String.format("Deseja %s %d veículos?\n\n%s\nNovo status de todos: %s",
+                                    acao, linhasSelecionadas.length, infoVeiculos.toString(), novoStatus);
+        }
+
         int confirmacao = JOptionPane.showConfirmDialog(this,
-                "Deseja alterar a disponibilidade do veículo?\n\n" +
-                "Veículo: " + marca + " " + modeloVeiculo + "\n" +
-                "Placa: " + placa + "\n\n" +
-                "Status atual: " + statusAtual + "\n" +
-                "Novo status: " + novoStatus,
+                mensagem,
                 "Confirmar Alteração",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE
         );
-        
+
         if (confirmacao != JOptionPane.YES_OPTION) {
             return;
         }
-        
+
         try {
             ArrayList<model.Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
-            
-            boolean veiculoEncontrado = false;
-            for (model.Veiculo veiculo : listaVeiculos) {
-                if (String.valueOf(veiculo.getIdVeiculo()).equals(idVeiculo)) {
-                    veiculo.setAtivo(!estaDisponivel);
-                    veiculoEncontrado = true;
-                    System.out.println("Status alterado: " + idVeiculo + " → " + novoStatus);
-                    break;
+
+            int alterados = 0;
+            for (String id : idsParaAlterar) {
+                for (model.Veiculo veiculo : listaVeiculos) {
+                    if (String.valueOf(veiculo.getIdVeiculo()).equals(id)) {
+                        veiculo.setAtivo(tornarDisponivel);
+                        alterados++;
+                        System.out.println("Status alterado: ID=" + id + " → " + novoStatus);
+                        break;
+                    }
                 }
             }
-            
-            if (!veiculoEncontrado) {
+
+            if (alterados == 0) {
                 JOptionPane.showMessageDialog(this,
-                        "Veículo não encontrado no sistema.",
+                        "Nenhum veículo foi encontrado no sistema.",
                         "Erro",
                         JOptionPane.ERROR_MESSAGE
                 );
                 return;
             }
-            
+
             util.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
             util.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
-            
+
+            String mensagemSucesso;
+            if (alterados == 1) {
+                mensagemSucesso = String.format("Disponibilidade alterada com sucesso!\nNovo status: %s", novoStatus);
+            } else {
+                mensagemSucesso = String.format("%d veículos alterados com sucesso!\nNovo status: %s", alterados, novoStatus);
+            }
+
             JOptionPane.showMessageDialog(this, 
-                    "Disponibilidade alterada com sucesso!\n\n" +
-                    "Veículo: " + marca + " " + modeloVeiculo + "\n" +
-                    "Novo status: " + novoStatus,
+                    mensagemSucesso,
                     "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE
             );
-            
+
+            // Salva os IDs antes de recarregar
+            ArrayList<String> idsParaReselecionar = new ArrayList<>(idsParaAlterar);
+
+            // Recarrega a tabela
             carregarDadosNaTabela();
-            
-            if (linhaSelecionada < jTDados.getRowCount()) {
-                jTDados.setRowSelectionInterval(linhaSelecionada, linhaSelecionada);
+
+            // Tenta reselecionar os veículos
+            jTDados.clearSelection();
+            for (int i = 0; i < jTDados.getRowCount(); i++) {
+                String idLinha = model.getValueAt(i, 0).toString();
+                if (idsParaReselecionar.contains(idLinha)) {
+                    jTDados.addRowSelectionInterval(i, i);
+                }
             }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
                     "Erro ao alterar disponibilidade:\n" + e.getMessage(),
@@ -198,29 +296,33 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
             );
             e.printStackTrace();
         }
-        
     }
     
     // Adicione um SelectionListener na tabela para atualizar o botão
     private void configurarSelecaoTabela() {
         jTDados.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
-                int linhaSelecionada = jTDados.getSelectedRow();
-                if (linhaSelecionada >= 0) {
-                    DefaultTableModel model = (DefaultTableModel) jTDados.getModel();
-                    String status = model.getValueAt(linhaSelecionada, 5).toString().trim();
-
-                    // Atualiza o texto do botão baseado no status atual
-                    if (status.equalsIgnoreCase("Disponível")) {
-                        jBtnDisponib.setText("Marcar como Indisponível");
-                        jBtnDisponib.setEnabled(true);
-                    } else {
-                        jBtnDisponib.setText("Marcar como Disponível");
-                        jBtnDisponib.setEnabled(true);
-                    }
-                } else {
+                int[] linhasSelecionadas = jTDados.getSelectedRows();
+                
+                if (linhasSelecionadas.length == 0) {
                     jBtnDisponib.setText("Alterar Disponibilidade");
                     jBtnDisponib.setEnabled(false);
+                    
+                } else if (linhasSelecionadas.length == 1) {
+                    // Uma linha selecionada - comportamento original
+                    DefaultTableModel model = (DefaultTableModel) jTDados.getModel();
+                    String status = model.getValueAt(linhasSelecionadas[0], 5).toString().trim();
+                    
+                    if (status.equalsIgnoreCase("Disponível")) {
+                        jBtnDisponib.setText("Marcar como Indisponível");
+                    } else {
+                        jBtnDisponib.setText("Marcar como Disponível");
+                    }
+                    jBtnDisponib.setEnabled(true);
+                } else {
+                    // Múltiplas linhas selecionadas
+                    jBtnDisponib.setText(String.format("Alterar %d veículos", linhasSelecionadas.length));
+                    jBtnDisponib.setEnabled(true);
                 }
             }
         });
@@ -228,65 +330,92 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
     
     // Deletando linha selecionada ---------------------------------------------
     private void deletarVeiculoSelecionado() {
-        int linhaSelecionada = jTDados.getSelectedRow();
-        
-        if (linhaSelecionada == -1) {
+        int[] linhasSelecionadas = jTDados.getSelectedRows();
+
+        if (linhasSelecionadas.length == 0) {
             JOptionPane.showMessageDialog(this,
-                    "Por favor, selecione um veículo para deletar.",
+                    "Por favor, selecione um ou mais veículos para deletar.",
                     "Nenhum veículo selecionado",
                     JOptionPane.WARNING_MESSAGE
             );
             return;
         }
-        
-        // Recebe as informações para validação --------------------------------
+
         DefaultTableModel model = (DefaultTableModel) jTDados.getModel();
-        String idVeiculo = model.getValueAt(linhaSelecionada, 0).toString().trim();
-        String placa = model.getValueAt(linhaSelecionada, 1).toString().trim();
-        String modelo = model.getValueAt(linhaSelecionada, 3).toString().trim();
-        
-        // Validação da exclusão -----------------------------------------------
+
+        // Coleta informações dos veículos selecionados
+        ArrayList<String> idsParaDeletar = new ArrayList<>();
+        StringBuilder infoVeiculos = new StringBuilder();
+
+        for (int i = 0; i < linhasSelecionadas.length; i++) {
+            int linha = linhasSelecionadas[i];
+            String idVeiculo = model.getValueAt(linha, 0).toString().trim();
+            String placa = model.getValueAt(linha, 1).toString().trim();
+            String modeloVeiculo = model.getValueAt(linha, 3).toString().trim();
+
+            idsParaDeletar.add(idVeiculo);
+            infoVeiculos.append(String.format("  • ID: %s | Placa: %s | Modelo: %s\n", 
+                                              idVeiculo, placa, modeloVeiculo));
+        }
+
+        // Confirmação com o usuário
+        String mensagem;
+        if (linhasSelecionadas.length == 1) {
+            mensagem = "Tem certeza que deseja deletar o veículo?\n\n" + infoVeiculos.toString();
+        } else {
+            mensagem = String.format("Tem certeza que deseja deletar %d veículos?\n\n%s", 
+                                    linhasSelecionadas.length, infoVeiculos.toString());
+        }
+
         int confirmacao = JOptionPane.showConfirmDialog(this,
-                "Tem certeza que deseja deletar o veículo?\n\n" +
-                "ID: " + idVeiculo + "\n" +
-                "Placa: " + placa + "\n" +
-                "Modelo: " + modelo,
+                mensagem,
                 "Confirmar Exclusão",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE
         );
-        
+
         if (confirmacao != JOptionPane.YES_OPTION) {
             return;
         }
-        
-        // Leitura de todos os veiculos
+
+        // Leitura de todos os veículos
         ArrayList<model.Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
-        
-        // Remove o veículo com o ID correspondente
-        boolean removido = listaVeiculos.removeIf(v -> String.valueOf(v.getIdVeiculo()).equals(idVeiculo));
-        
-        if (!removido) {
+
+        // Remove os veículos com os IDs correspondentes
+        int removidos = 0;
+        for (String id : idsParaDeletar) {
+            boolean removeu = listaVeiculos.removeIf(v -> String.valueOf(v.getIdVeiculo()).equals(id));
+            if (removeu) removidos++;
+        }
+
+        if (removidos == 0) {
             JOptionPane.showMessageDialog(this,
-                "Veículo não encontrado na lista.",
+                "Nenhum veículo foi encontrado na lista.",
                 "Erro",
                 JOptionPane.ERROR_MESSAGE
             );
             return;
         }
-        
+
         util.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
         util.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
-        
+
+        String mensagemSucesso;
+        if (removidos == 1) {
+            mensagemSucesso = "Veículo deletado com sucesso!";
+        } else {
+            mensagemSucesso = String.format("%d veículos deletados com sucesso!", removidos);
+        }
+
         JOptionPane.showMessageDialog(this, 
-                "Veículo deletado com sucesso!",
+                mensagemSucesso,
                 "Sucesso",
                 JOptionPane.INFORMATION_MESSAGE
         );
-        
-        
+
         carregarDadosNaTabela();
     }
+
     
     // Configurações da Combo Box ----------------------------------------------
     private void configurarComboFiltro() {
