@@ -1,25 +1,423 @@
 package view;
 
 import java.awt.Color;
+import util.ThemeAdm;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JOptionPane;
+import model.Movimento;
+import model.TipoDespesa;
+import model.Veiculo;
 
 public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 
     public TelaRegistroPrejuizo() {
         initComponents();
         adicionarPlaceholders();
+        configurarCampoIdAutomatico();
+        configurarCalendario();
+        configurarComboBoxTipoDespesa();
+        permitirApenasNumeros(jTFEncontrarID);
+        adicionarValidacoesFoco();
+        setLocationRelativeTo(null);
+        ThemeAdm.applyTheme(this);
+        ThemeAdm.addRememberOnClose(this);
+        this.setTitle("GynLog");
     }
+    
+    private void configurarCampoIdAutomatico() {
+        jTFIdMovimentacao.setEditable(false);
+    }
+    
+    // Permite apenas números no campo ID do veículo
+    private void permitirApenasNumeros(javax.swing.JTextField campo) {
+        campo.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c) && c != java.awt.event.KeyEvent.VK_BACK_SPACE && c != java.awt.event.KeyEvent.VK_DELETE) {
+                    evt.consume();
+                }
+            }
+        });
+    }
+    
+    private void configurarComboBoxTipoDespesa() {
+        // Esconde o campo "Outros" inicialmente
+        jTFOutros.setVisible(false);
+        
+        // Adiciona listener para detectar mudanças na seleção
+        jCBidTipoDespesa.addActionListener(e -> {
+            int selectedIndex = jCBidTipoDespesa.getSelectedIndex();
+            
+            // Se selecionou "Outros" (índice 14), mostra o campo
+            if (selectedIndex == 14) {
+                jTFOutros.setVisible(true);
+                jTFOutros.setText(""); // Limpa o campo
+                jTFOutros.setForeground(Color.BLACK);
+                jTFOutros.requestFocus(); // Foca no campo para o usuário digitar
+            } else {
+                // Se selecionou qualquer outra opção, esconde o campo
+                jTFOutros.setVisible(false);
+                jTFOutros.setText("Outro");
+                jTFOutros.setForeground(Color.GRAY);
+            }
+        });
+    }
+    
+    // Configura o calendário com a data atual
+    private void configurarCalendario() {
+        // Define a data atual no JDateChooser
+        jDateChooser.setDate(new java.util.Date());
+        
+        // Define formato de exibição da data
+        jDateChooser.setDateFormatString("dd/MM/yyyy");
+    }
+    
+    // Obtém a data selecionada no calendário formatada
+    private String obterDataSelecionada() {
+        java.util.Date dataSelecionada = jDateChooser.getDate();
+        if (dataSelecionada == null) {
+            // Se nenhuma data foi selecionada, usa a data atual
+            dataSelecionada = new java.util.Date();
+        }
+        
+        // Formata a data para dd/MM/yyyy
+        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(dataSelecionada);
+    }
+    
+    // Adicionando validações quando o camp perde o foco
+    private void adicionarValidacoesFoco(){
+        // Validação do ID do veículo
+        jTFEncontrarID.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                String raw = jTFEncontrarID.getText().trim();
+                
+                if (raw.isEmpty() || raw.equals("Digite o ID do veículo")) {
+                    return;
+                }
+                
+                if (!raw.matches("\\d+")) {
+                    JOptionPane.showMessageDialog(TelaRegistroPrejuizo.this,
+                            "O ID deve conter apenas números", 
+                            "Erro de Validação",
+                            JOptionPane.ERROR_MESSAGE);
+                    jTFEncontrarID.requestFocus();
+                    return;
+                }
+                
+                try {
+                    int idVeiculo = Integer.parseInt(raw);
+                    java.util.ArrayList<Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
+                    boolean encontrado = false;
+                    
+                    for (Veiculo v : listaVeiculos) {
+                        if (v.getIdVeiculo() == idVeiculo) {
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!encontrado) {
+                        JOptionPane.showMessageDialog(TelaRegistroPrejuizo.this,
+                                "Veículo com ID " + idVeiculo + " não encontrado!\n" +
+                                "Por favor, verifique o ID e tente novamente.",
+                                "Veículo Não Encontrado",
+                                JOptionPane.WARNING_MESSAGE);
+                        jTFEncontrarID.requestFocus();
+                        return;
+                    }
+                    
+                    int proximoId = gerarProximoIdMovimento();
+                    jTFIdMovimentacao.setText(String.valueOf(proximoId));
+                    jTFIdMovimentacao.setForeground(Color.BLACK);
+                    
+                } catch (Exception e) {
+                    System.err.println("Erro ao verificar veículo: " + e.getMessage());
+                }
+            }
+        });
+        
+        // Validação do valor
+        jTFRRebeValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                String raw = jTFRRebeValor.getText().trim();
+                
+                if (raw.isEmpty() || raw.equals("R$: ")) {
+                    return;
+                }
+                
+                // Remove caracteres não numéricos exceto vírgula e ponto
+                String valorLimpo = raw.replace(",", ".");
+                
+                try {
+                    double valor = Double.parseDouble(valorLimpo);
+                    if (valor < 0) {
+                        JOptionPane.showMessageDialog(TelaRegistroPrejuizo.this,
+                                "O valor não pode ser negativo.",
+                                "Erro de Validação",
+                                JOptionPane.ERROR_MESSAGE);
+                        jTFRRebeValor.requestFocus();
+                        return;
+                    }
+                    // Formata o valor para exibição
+                    jTFRRebeValor.setText(String.format("%.2f", valor));
+                    jTFRRebeValor.setForeground(Color.BLACK);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(TelaRegistroPrejuizo.this,
+                            "Valor inválido. Use apenas números.",
+                            "Erro de Validação",
+                            JOptionPane.ERROR_MESSAGE);
+                    jTFRRebeValor.requestFocus();
+                }
+            }
+        });
+    }
+    
+    // Gera o próximo ID de movimentação
+    private int gerarProximoIdMovimento() {
+        java.util.ArrayList<Movimento> lista = util.ArquivoTXT_Movimento.lerArquivo();
+        
+        // Se a lista está vazia, começa com 10000
+        if (lista.isEmpty()) {
+            return 10000;
+        }
+        
+        int maiorId = 10000; // ID mínimo
+        for (Movimento m : lista) {
+            if (m.getIdMovimento() > maiorId) {
+                maiorId = m.getIdMovimento();
+            }
+        }
+        return maiorId + 1;
+    }
+    
+    // Limpa todos os campos do formulário
+    private void limparCampos() {
+        jTFEncontrarID.setText("Digite o ID do veículo");
+        jTFEncontrarID.setForeground(Color.GRAY);
+        
+        jTFIdMovimentacao.setText("Gerado automaticamente");
+        jTFIdMovimentacao.setForeground(Color.GRAY);
+        
+        jDateChooser.setDate(new java.util.Date());
+        
+        jTFRRebeValor.setText("R$: ");
+        jTFRRebeValor.setForeground(Color.GRAY);
+        
+        jCBidTipoDespesa.setSelectedIndex(0);
+        
+        jTFOutros.setText("Outro");
+        jTFOutros.setForeground(Color.GRAY);
+        jTFOutros.setVisible(false);
+        
+        jTADescricao.setText("");
+        
+        jTFEncontrarID.requestFocus();
+    }
+    
+    // Converte o item selecionado para ID de tipo de despesa
+    private int obterIdTipoDespesa() {
+        int selectedIndex = jCBidTipoDespesa.getSelectedIndex();
+        
+        if (selectedIndex == 0) {
+            return -1; // Inválido
+        }
+        
+        // Converte índice para ID: índice 1 = ID 101, índice 2 = ID 102, etc.
+        return 100 + selectedIndex;
+    }
+    
+    // Vamos usar o id tipo despesa como int no registro
+    // Vai ser String apenas para o usuario, nos relatorios serão numeros
+    
+    // Obtém o tipo de despesa selecionado
+    private int obterTipoDespesaSelecionado() {
+        int selectedIndex = jCBidTipoDespesa.getSelectedIndex();
+        
+        if (selectedIndex == 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione o tipo de despesa.",
+                    "Campo Obrigatório",
+                    JOptionPane.WARNING_MESSAGE);
+            jCBidTipoDespesa.requestFocus();
+            return -1;
+        }
+        
+        return selectedIndex; // Retorna o índice que representa o tipo
+    }
+    
+    // Obtém o tipo de despesa ou o texto customizado
+    private String obterTipoDespesaTexto() {
+        int selectedIndex = jCBidTipoDespesa.getSelectedIndex();
+        
+        if (selectedIndex == 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione o tipo de despesa.",
+                    "Campo Obrigatório",
+                    JOptionPane.WARNING_MESSAGE);
+            jCBidTipoDespesa.requestFocus();
+            return null;
+        }
+        
+        // Se selecionou "Outros", retorna o texto digitado pelo usuário
+        if (selectedIndex == 14) {
+            String outrosText = jTFOutros.getText().trim();
+            if (outrosText.isEmpty() || outrosText.equals("Outro")) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, especifique o tipo de despesa em 'Outros'.",
+                        "Campo Obrigatório",
+                        JOptionPane.WARNING_MESSAGE);
+                jTFOutros.requestFocus();
+                return null;
+            }
+            return outrosText;
+        }
+        
+        // Csao contrario retorna a opcao selecionada no CB
+        return (String) jCBidTipoDespesa.getSelectedItem();
+    }
+    
+    // Método principal de registro
+    private void registrarMovimento() {
+        try {
+            // Validações básicas
+            String idVeiculoText = jTFEncontrarID.getText().trim();
+            String idMovimentoText = jTFIdMovimentacao.getText().trim();
+            String dataText = obterDataSelecionada();
+            String valorText = jTFRRebeValor.getText().trim();
+            String descricaoText = jTADescricao.getText().trim();
+            
+            // Verifica ID do veículo
+            if (idVeiculoText.equals("Digite o ID do veículo") || idVeiculoText.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, preencha o ID do veículo.",
+                        "Campo Obrigatório",
+                        JOptionPane.WARNING_MESSAGE);
+                jTFEncontrarID.requestFocus();
+                return;
+            }
+            
+            // Verifica se o ID da movimentação foi gerado
+            if (idMovimentoText.equals("Gerado automaticamente") || idMovimentoText.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, preencha um ID de veículo válido primeiro.\n" +
+                        "O ID da movimentação será gerado automaticamente.",
+                        "ID Não Gerado",
+                        JOptionPane.WARNING_MESSAGE);
+                jTFEncontrarID.requestFocus();
+                return;
+            }
+            
+            // Verifica tipo de despesa
+            int selectedIndex = jCBidTipoDespesa.getSelectedIndex();
+            if (selectedIndex == 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, selecione o tipo de despesa.",
+                        "Campo Obrigatório",
+                        JOptionPane.WARNING_MESSAGE);
+                jCBidTipoDespesa.requestFocus();
+            return;
+        }
+            
+            int idTipoDespesa = 100 + selectedIndex;
+            
+            // Recebe o texto da despesa
+            String nomeTipoDespesa = obterTipoDespesaTexto();
+            if (nomeTipoDespesa == null) {
+                return;
+            }
+            
+            // Verifica valor
+            if (valorText.equals("R$: ") || valorText.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, preencha o valor da despesa.",
+                        "Campo Obrigatório",
+                        JOptionPane.WARNING_MESSAGE);
+                jTFRRebeValor.requestFocus();
+                return;
+            }
+            
+            // Verifica se o usuário digitou uma descrição
+            if (descricaoText.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Por favor, descreva o motivo/necessidade desta movimentação.",
+                        "Campo Obrigatório",
+                        JOptionPane.WARNING_MESSAGE);
+                jTADescricao.requestFocus();
+                return;
+            }
+            
+            // Converte os valores
+            int idVeiculo = Integer.parseInt(idVeiculoText);
+            int idMovimento = Integer.parseInt(idMovimentoText);
+            double valor = Double.parseDouble(valorText.replace(",", "."));
+            
+            Movimento novoMovimento = new Movimento(
+                idMovimento,
+                idVeiculo,
+                idTipoDespesa,
+                valor,
+                descricaoText,
+                dataText
+            );
+            
+                        
+            // TXTs
+            util.ArquivoTXT_Movimento.salvarLinha(novoMovimento);
+            util.ArquivoTXT_Despesa.sincronizarComMovimento();
+            
+            // XLSXs
+            java.util.ArrayList<Movimento> listaMovimentos = util.ArquivoTXT_Movimento.lerArquivo();
+            util.ArquivoExcel_Movimento.Transf_Excel(listaMovimentos, "Movimento.xlsx");
+            
+            // Sync
+            util.ArquivoExcel_Despesa.Transf_Excel(null, "Despesas.xlsx");
+            
+            JOptionPane.showMessageDialog(this,
+                    "Movimentação registrada com sucesso!\n" +
+                    "ID da movimentação: " + idMovimento + "\n" +
+                    "ID do veículo: " + idVeiculo + "\n" +
+                    "Tipo de despesa: " + nomeTipoDespesa + "\n" +
+                    "Data: " + dataText,
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            
+            limparCampos();
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro: Verifique se os campos numéricos contêm valores válidos.\n\n" +
+                    "Detalhes técnicos: " + e.getMessage(),
+                    "Formato Inválido",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao registrar movimentação!\n\n" +
+                    "Detalhes: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+    
     
     // Metodos de Placeholder -------------------------------------------------------------
     private void aplicarPlaceholder(javax.swing.JTextField campo, String placeholder) {
+        final Color PLACEHOLDER_COLOR = ThemeAdm.getTheme() == ThemeAdm.Theme.LIGHT ? Color.GRAY : new Color(150, 150, 150);
+        
         campo.setText(placeholder);
-        campo.setForeground(Color.GRAY);
+        campo.setForeground(PLACEHOLDER_COLOR);
 
         campo.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (campo.getText().equals(placeholder)) {
                     campo.setText("");
-                    campo.setForeground(Color.BLACK);
+                    campo.setForeground(ThemeAdm.getTextColor());
                 }
             }
 
@@ -27,7 +425,7 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (campo.getText().isEmpty()) {
                     campo.setText(placeholder);
-                    campo.setForeground(Color.GRAY);
+                    campo.setForeground(PLACEHOLDER_COLOR);
                 }
             }
         });
@@ -35,11 +433,9 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 
     private void adicionarPlaceholders() {
         aplicarPlaceholder(jTFEncontrarID, "Digite o ID do veículo");
-        aplicarPlaceholder(jTFEncontrarPlaca, "Placa do veículo");
-        aplicarPlaceholder(jTFEncontrarData, "Data do registro");
-        aplicarPlaceholder(jTFEncontrarMarca, "Marca do veículo");
-        aplicarPlaceholder(jTFEncontrarModelo, "Marca do veículo");
-        aplicarPlaceholder(jTFEncontrarIdRegistro, "ID do Registro");
+        aplicarPlaceholder(jTFIdMovimentacao, "Gerado automaticamente");
+        aplicarPlaceholder(jTFRRebeValor, "R$: ");
+        aplicarPlaceholder(jTFOutros, "Outro");
     }
     
     @SuppressWarnings("unchecked")
@@ -47,45 +443,31 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
     private void initComponents() {
 
         btnGroupEscolhaClasse = new javax.swing.ButtonGroup();
+        canvas1 = new java.awt.Canvas();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jTFEncontrarID = new javax.swing.JTextField();
-        jTFEncontrarPlaca = new javax.swing.JTextField();
-        jTFEncontrarData = new javax.swing.JTextField();
-        jTFEncontrarIdRegistro = new javax.swing.JTextField();
-        jTFEncontrarModelo = new javax.swing.JTextField();
-        jTFEncontrarMarca = new javax.swing.JTextField();
+        jbtnRegistrar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTFIdMovimentacao = new javax.swing.JTextField();
+        jTFRRebeValor = new javax.swing.JTextField();
+        jCBidTipoDespesa = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTADescricao = new javax.swing.JTextArea();
+        jTFOutros = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTFComponenteQuebrado1 = new javax.swing.JTextField();
-        jTFValor1 = new javax.swing.JTextField();
-        jTFDescricao1 = new javax.swing.JTextField();
-        jTFComponenteQuebrado2 = new javax.swing.JTextField();
-        jTFValor2 = new javax.swing.JTextField();
-        jTFDescricao2 = new javax.swing.JTextField();
-        jTFValor3 = new javax.swing.JTextField();
-        jTFComponenteQuebrado3 = new javax.swing.JTextField();
-        jTFDescricao3 = new javax.swing.JTextField();
-        jTFComponenteQuebrado4 = new javax.swing.JTextField();
-        jTFValor4 = new javax.swing.JTextField();
-        jTFDescricao4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTFData4 = new javax.swing.JTextField();
-        jTFData3 = new javax.swing.JTextField();
-        jTFData2 = new javax.swing.JTextField();
-        jTFData1 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
+        jPanel3 = new javax.swing.JPanel();
+        jBtnListaVeiculos = new javax.swing.JButton();
+        jBtnRegistrarNovo = new javax.swing.JButton();
+        jBtnRegistrarMovimento = new javax.swing.JButton();
+        jBtnHome = new javax.swing.JButton();
+        jBtnListaMovimento = new javax.swing.JButton();
+        jBtnExit = new javax.swing.JButton();
+        jBtnTema = new javax.swing.JButton();
+        jBtnDetalhesMovim = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,178 +500,151 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jTFEncontrarID.setText("Veículo Id");
+
+        jbtnRegistrar.setText("Enviar Registro");
+        jbtnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRegistrarActionPerformed(evt);
+            }
+        });
+
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Relatório de Aravias para Classificação de Danos em Veículos Registrados");
 
-        jTFEncontrarID.setText("Veículo Id");
-        jTFEncontrarID.addActionListener(new java.awt.event.ActionListener() {
+        jTFIdMovimentacao.setText("id movimento");
+
+        jTFRRebeValor.setText("Valor");
+
+        jCBidTipoDespesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "Combustível", "Manutenção Preventiva", "Manutenção Corretiva", "Pneus e Rodas", "Documentação e Licenciamento", "Multas e Penalidades", "Seguro", "Pedágios", "Lavagem e Higienização", "Rastreamento e Monitoramento", "Equipamentos e Acessórios", "Energia / Carregamento", "Despesas Administrativas", "Outros" }));
+
+        jTADescricao.setColumns(20);
+        jTADescricao.setRows(5);
+        jScrollPane1.setViewportView(jTADescricao);
+
+        jTFOutros.setText("outros");
+
+        jLabel4.setText("Descrição da movimentação:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnRegistrar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTFEncontrarID)
+                                    .addComponent(jTFIdMovimentacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCBidTipoDespesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFOutros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jTFRRebeValor, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 144, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFEncontrarID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBidTipoDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFIdMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFOutros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFRRebeValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnRegistrar)
+                .addGap(39, 39, 39))
+        );
+
+        jBtnListaVeiculos.setText("Lista de Veículos Registrados");
+        jBtnListaVeiculos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnListaVeiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEncontrarIDActionPerformed(evt);
+                jBtnListaVeiculosActionPerformed(evt);
             }
         });
 
-        jTFEncontrarPlaca.setText("Placa");
-        jTFEncontrarPlaca.addActionListener(new java.awt.event.ActionListener() {
+        jBtnRegistrarNovo.setText("Registrar novo veículo");
+        jBtnRegistrarNovo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnRegistrarNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEncontrarPlacaActionPerformed(evt);
+                jBtnRegistrarNovoActionPerformed(evt);
             }
         });
 
-        jTFEncontrarData.setText("Data");
-        jTFEncontrarData.addActionListener(new java.awt.event.ActionListener() {
+        jBtnRegistrarMovimento.setText("Registrar nova finança");
+        jBtnRegistrarMovimento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnRegistrarMovimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEncontrarDataActionPerformed(evt);
+                jBtnRegistrarMovimentoActionPerformed(evt);
             }
         });
 
-        jTFEncontrarIdRegistro.setText("Id Registro");
-        jTFEncontrarIdRegistro.addActionListener(new java.awt.event.ActionListener() {
+        jBtnHome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBtnHome.setText("Inicio");
+        jBtnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEncontrarIdRegistroActionPerformed(evt);
+                jBtnHomeActionPerformed(evt);
             }
         });
 
-        jTFEncontrarModelo.setText("Modelo");
-        jTFEncontrarModelo.addActionListener(new java.awt.event.ActionListener() {
+        jBtnListaMovimento.setText("Lista de fincanças");
+        jBtnListaMovimento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jBtnExit.setText("Fechar programa");
+        jBtnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEncontrarModeloActionPerformed(evt);
+                jBtnExitActionPerformed(evt);
             }
         });
 
-        jTFEncontrarMarca.setText("Marca");
-        jTFEncontrarMarca.addActionListener(new java.awt.event.ActionListener() {
+        jBtnTema.setText("Claro / Escuro");
+        jBtnTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFEncontrarMarcaActionPerformed(evt);
+                jBtnTemaActionPerformed(evt);
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Automóveis, caminhonetas, caminhonetes e utilitários com estrutura em monobloco");
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Componentes peças estruturais/segurança passiva avariadas no acidente");
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("COMPONENTE AVARIADO");
-
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("VALOR");
-
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("DESCRIÇÃO");
-
-        jTFComponenteQuebrado1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnDetalhesMovim.setText("Detalhes das movimentações");
+        jBtnDetalhesMovim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnDetalhesMovim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFComponenteQuebrado1ActionPerformed(evt);
+                jBtnDetalhesMovimActionPerformed(evt);
             }
         });
-
-        jTFValor1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFValor1ActionPerformed(evt);
-            }
-        });
-
-        jTFDescricao1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFDescricao1ActionPerformed(evt);
-            }
-        });
-
-        jTFComponenteQuebrado2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFComponenteQuebrado2ActionPerformed(evt);
-            }
-        });
-
-        jTFValor2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFValor2ActionPerformed(evt);
-            }
-        });
-
-        jTFDescricao2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFDescricao2ActionPerformed(evt);
-            }
-        });
-
-        jTFValor3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFValor3ActionPerformed(evt);
-            }
-        });
-
-        jTFComponenteQuebrado3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFComponenteQuebrado3ActionPerformed(evt);
-            }
-        });
-
-        jTFDescricao3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFDescricao3ActionPerformed(evt);
-            }
-        });
-
-        jTFComponenteQuebrado4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFComponenteQuebrado4ActionPerformed(evt);
-            }
-        });
-
-        jTFValor4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFValor4ActionPerformed(evt);
-            }
-        });
-
-        jTFDescricao4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFDescricao4ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Enviar Registro");
-
-        jTFData4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFData4ActionPerformed(evt);
-            }
-        });
-
-        jTFData3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFData3ActionPerformed(evt);
-            }
-        });
-
-        jTFData2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFData2ActionPerformed(evt);
-            }
-        });
-
-        jTFData1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFData1ActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("DATA");
-
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("R$:");
-
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("R$:");
-
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("R$:");
-
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("R$:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -298,256 +653,124 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTFEncontrarMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFEncontrarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFEncontrarIdRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTFEncontrarID, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFEncontrarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFEncontrarData, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jLabel5))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFComponenteQuebrado3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTFComponenteQuebrado2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTFComponenteQuebrado1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTFComponenteQuebrado4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTFValor2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                                    .addComponent(jTFValor1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFValor3)
-                                    .addComponent(jTFValor4)))
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFDescricao4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFDescricao3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFDescricao2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFDescricao1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFData4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFData3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFData2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFData1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)))
+                                .addContainerGap()
+                                .addComponent(jBtnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBtnListaVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBtnRegistrarNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBtnRegistrarMovimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBtnListaMovimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBtnDetalhesMovim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBtnTema))))
+                        .addGap(0, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(jButton1)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBtnExit)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFEncontrarID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFEncontrarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFEncontrarData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(jBtnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jBtnListaVeiculos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFEncontrarMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFEncontrarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFEncontrarIdRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addComponent(jBtnRegistrarNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addComponent(jBtnRegistrarMovimento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTFComponenteQuebrado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFValor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTFComponenteQuebrado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFValor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTFComponenteQuebrado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFValor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTFComponenteQuebrado4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFValor4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFDescricao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFDescricao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFDescricao3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFDescricao4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFData1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFData2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFData3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFData4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jBtnListaMovimento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnDetalhesMovim)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addComponent(jBtnTema)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                .addComponent(jBtnExit)
+                .addGap(33, 33, 33))
         );
-
-        jScrollPane1.setViewportView(jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFComponenteQuebrado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFComponenteQuebrado1ActionPerformed
+    private void jBtnListaVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnListaVeiculosActionPerformed
+        new TelaListaVeiculo().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBtnListaVeiculosActionPerformed
 
-    private void jTFComponenteQuebrado2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFComponenteQuebrado2ActionPerformed
+    private void jBtnRegistrarNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarNovoActionPerformed
+        new TelaRegistroVeiculo().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBtnRegistrarNovoActionPerformed
 
-    private void jTFComponenteQuebrado3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado3ActionPerformed
+    private void jBtnRegistrarMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarMovimentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFComponenteQuebrado3ActionPerformed
+    }//GEN-LAST:event_jBtnRegistrarMovimentoActionPerformed
 
-    private void jTFComponenteQuebrado4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComponenteQuebrado4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFComponenteQuebrado4ActionPerformed
+    private void jBtnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnHomeActionPerformed
+        new TelaInicio().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBtnHomeActionPerformed
 
-    private void jTFValor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFValor1ActionPerformed
+    private void jBtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExitActionPerformed
+        int confirmacao =  javax.swing.JOptionPane.showConfirmDialog(this,
+            "Tem certeza que deseja sair do sistema?" ,
+            "Confirmação de Saída" ,
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.QUESTION_MESSAGE
+        );
 
-    private void jTFValor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFValor2ActionPerformed
+        if(confirmacao == javax.swing.JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jBtnExitActionPerformed
 
-    private void jTFValor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFValor3ActionPerformed
+    private void jBtnTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTemaActionPerformed
+        if (ThemeAdm.getTheme() == ThemeAdm.Theme.LIGHT) {
+            ThemeAdm.setTheme(ThemeAdm.Theme.DARK);
+        } else {
+            ThemeAdm.setTheme(ThemeAdm.Theme.LIGHT);
+        }
+        ThemeAdm.applyTheme(this);
+    }//GEN-LAST:event_jBtnTemaActionPerformed
 
-    private void jTFValor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFValor4ActionPerformed
+    private void jBtnDetalhesMovimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalhesMovimActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFValor4ActionPerformed
+    }//GEN-LAST:event_jBtnDetalhesMovimActionPerformed
 
-    private void jTFDescricao1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFDescricao1ActionPerformed
-
-    private void jTFDescricao2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFDescricao2ActionPerformed
-
-    private void jTFDescricao3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFDescricao3ActionPerformed
-
-    private void jTFDescricao4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDescricao4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFDescricao4ActionPerformed
-
-    private void jTFData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFData1ActionPerformed
-
-    private void jTFData2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFData2ActionPerformed
-
-    private void jTFData3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFData3ActionPerformed
-
-    private void jTFData4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFData4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFData4ActionPerformed
-
-    private void jTFEncontrarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEncontrarIDActionPerformed
-
-    private void jTFEncontrarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarPlacaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEncontrarPlacaActionPerformed
-
-    private void jTFEncontrarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEncontrarDataActionPerformed
-
-    private void jTFEncontrarMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarMarcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEncontrarMarcaActionPerformed
-
-    private void jTFEncontrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEncontrarModeloActionPerformed
-
-    private void jTFEncontrarIdRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEncontrarIdRegistroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFEncontrarIdRegistroActionPerformed
+    private void jbtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRegistrarActionPerformed
+        registrarMovimento();
+    }//GEN-LAST:event_jbtnRegistrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -586,44 +809,30 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroupEscolhaClasse;
-    private javax.swing.JButton jButton1;
+    private java.awt.Canvas canvas1;
+    private javax.swing.JButton jBtnDetalhesMovim;
+    private javax.swing.JButton jBtnExit;
+    private javax.swing.JButton jBtnHome;
+    private javax.swing.JButton jBtnListaMovimento;
+    private javax.swing.JButton jBtnListaVeiculos;
+    private javax.swing.JButton jBtnRegistrarMovimento;
+    private javax.swing.JButton jBtnRegistrarNovo;
+    private javax.swing.JButton jBtnTema;
+    private javax.swing.JComboBox<String> jCBidTipoDespesa;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFComponenteQuebrado1;
-    private javax.swing.JTextField jTFComponenteQuebrado2;
-    private javax.swing.JTextField jTFComponenteQuebrado3;
-    private javax.swing.JTextField jTFComponenteQuebrado4;
-    private javax.swing.JTextField jTFData1;
-    private javax.swing.JTextField jTFData2;
-    private javax.swing.JTextField jTFData3;
-    private javax.swing.JTextField jTFData4;
-    private javax.swing.JTextField jTFDescricao1;
-    private javax.swing.JTextField jTFDescricao2;
-    private javax.swing.JTextField jTFDescricao3;
-    private javax.swing.JTextField jTFDescricao4;
-    private javax.swing.JTextField jTFEncontrarData;
+    private javax.swing.JTextArea jTADescricao;
     private javax.swing.JTextField jTFEncontrarID;
-    private javax.swing.JTextField jTFEncontrarIdRegistro;
-    private javax.swing.JTextField jTFEncontrarMarca;
-    private javax.swing.JTextField jTFEncontrarModelo;
-    private javax.swing.JTextField jTFEncontrarPlaca;
-    private javax.swing.JTextField jTFValor1;
-    private javax.swing.JTextField jTFValor2;
-    private javax.swing.JTextField jTFValor3;
-    private javax.swing.JTextField jTFValor4;
+    private javax.swing.JTextField jTFIdMovimentacao;
+    private javax.swing.JTextField jTFOutros;
+    private javax.swing.JTextField jTFRRebeValor;
+    private javax.swing.JButton jbtnRegistrar;
     // End of variables declaration//GEN-END:variables
 }

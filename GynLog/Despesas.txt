@@ -1,0 +1,15 @@
+ID Tipo Despesa | Descrição
+101 | Abastecimento diesel S500 para uso em zona rural
+102 | Troca de bateria e verificação do alternador
+103 | Troca do cambio manual
+104 | Troca dos pneus traseiros por desgaste natural
+105 | Renovação de licenciamento com débitos quitados
+106 | Multa por excesso de velocidade
+107 | Seguro total com cobertura internacional
+108 | Pedágio simples na via de acesso à fazenda
+109 | Passeio no lava jato
+110 | Manutenção preventiva do sistema de rastreamento
+111 | Instalação de para-choque reforçado
+112 | Carregamento emergencial em posto de rodovia
+113 | Taxas de transferência de município
+114 | Compra de caixa organizadora e rede de proteção

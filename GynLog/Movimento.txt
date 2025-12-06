@@ -1,0 +1,104 @@
+ID Movimento | ID Veículo | ID Tipo Despesa | Valor | Descrição | Data
+10000 | 100234 | 101 | 450.50 | Abastecimento completo para viagem interestadual até São Paulo | 15/03/2024
+10001 | 100128 | 102 | 280.00 | Troca de óleo e filtros conforme programação de manutenção preventiva | 22/01/2023
+10002 | 100456 | 103 | 1850.00 | Reparo urgente do sistema de freios - pastilhas e discos desgastados | 08/07/2024
+10003 | 100312 | 104 | 920.00 | Substituição de 2 pneus dianteiros por desgaste irregular | 14/11/2022
+10004 | 100089 | 105 | 385.50 | Pagamento de IPVA e licenciamento anual do veículo | 30/01/2024
+10005 | 100267 | 106 | 195.80 | Multa por excesso de velocidade registrada em rodovia | 19/05/2023
+10006 | 100445 | 107 | 1650.00 | Renovação anual do seguro total com cobertura completa | 10/02/2024
+10007 | 100178 | 108 | 45.50 | Pedágios da rota Goiânia-Brasília ida e volta | 25/09/2024
+10008 | 100356 | 109 | 85.00 | Lavagem externa e interna completa do veículo | 03/04/2023
+10009 | 100201 | 110 | 320.00 | Instalação de rastreador GPS para segurança da frota | 17/08/2022
+10010 | 100423 | 111 | 540.00 | Compra de kit de emergência e extintor novo | 28/06/2024
+10011 | 100134 | 112 | 180.00 | Recarga elétrica em posto de carregamento rápido | 11/12/2023
+10012 | 100298 | 113 | 75.00 | Impressão de documentos e taxas administrativas do veículo | 06/03/2024
+10013 | 100467 | 114 | 250.00 | Aquisição de tapetes personalizados para proteção interna | 21/10/2022
+10014 | 100145 | 101 | 520.30 | Abastecimento diesel S10 para rota de entrega regional | 13/05/2024
+10015 | 100389 | 102 | 410.00 | Revisão dos 10.000 km com verificação geral de componentes | 02/01/2023
+10016 | 100256 | 103 | 2340.00 | Substituição de embreagem completa por fim da vida útil | 18/08/2024
+10017 | 100478 | 104 | 1120.00 | Troca completa dos 4 pneus por desgaste acima do limite | 27/02/2023
+10018 | 100112 | 105 | 425.00 | Pagamento de taxa de renovação de CNH do motorista | 09/11/2024
+10019 | 100334 | 106 | 287.40 | Multa por estacionamento irregular em zona proibida | 15/04/2022
+10020 | 100401 | 107 | 1890.00 | Contratação de seguro com cobertura para terceiros | 24/07/2024
+10021 | 100223 | 108 | 62.00 | Pedágios e taxas de travessia de ponte na rota | 31/12/2023
+10022 | 100489 | 109 | 120.00 | Higienização completa do ar-condicionado e bancos | 16/09/2022
+10023 | 100167 | 110 | 280.00 | Manutenção e recalibração do sistema de rastreamento | 05/06/2024
+10024 | 100345 | 111 | 680.00 | Instalação de câmera de ré e sensores de estacionamento | 20/03/2023
+10025 | 100412 | 112 | 210.00 | Carregamento completo da bateria elétrica em estação | 12/10/2024
+10026 | 100189 | 113 | 95.00 | Pagamento de taxa de vistoria anual obrigatória | 29/01/2022
+10027 | 100278 | 114 | 340.00 | Compra de organizador de porta-malas e acessórios | 07/05/2024
+10028 | 100456 | 101 | 485.70 | Abastecimento etanol para uso urbano durante a semana | 23/08/2023
+10029 | 100098 | 102 | 350.00 | Troca de velas de ignição e verificação do sistema elétrico | 14/02/2024
+10030 | 100367 | 103 | 1620.00 | Reparo do sistema de suspensão dianteira após impacto | 01/11/2022
+10031 | 100234 | 104 | 780.00 | Alinhamento, balanceamento e troca de 1 pneu traseiro | 19/07/2024
+10032 | 100445 | 105 | 465.00 | Renovação de documentação e transferência de propriedade | 26/04/2023
+10033 | 100156 | 106 | 412.90 | Multa por avanço de sinal vermelho com registro fotográfico | 10/09/2024
+10034 | 100389 | 107 | 2100.00 | Seguro contra roubo e incêndio com franquia reduzida | 03/12/2022
+10035 | 100267 | 108 | 38.50 | Pedágio único na rota metropolitana de distribuição | 17/06/2024
+10036 | 100478 | 109 | 95.00 | Lavagem expressa e aspiração dos interiores | 28/01/2023
+10037 | 100123 | 110 | 450.00 | Atualização do firmware do sistema de rastreamento | 11/08/2024
+10038 | 100312 | 111 | 820.00 | Instalação de protetor de caçamba e lona de cobertura | 22/03/2022
+10039 | 100401 | 112 | 165.00 | Carregamento parcial em ponto de recarga comercial | 04/10/2024
+10040 | 100245 | 113 | 110.00 | Taxas de renovação de cadastro na ANTT | 15/05/2023
+10041 | 100489 | 114 | 290.00 | Aquisição de capa protetora e suporte para celular | 27/12/2022
+10042 | 100178 | 101 | 512.40 | Abastecimento gasolina aditivada para melhor desempenho | 09/07/2024
+10043 | 100356 | 102 | 295.00 | Revisão dos freios e verificação de fluidos gerais | 20/02/2023
+10044 | 100134 | 103 | 2180.00 | Troca completa do sistema de escapamento por corrosão | 13/09/2024
+10045 | 100467 | 104 | 1340.00 | Substituição de 3 pneus por danos irreparáveis | 06/01/2022
+10046 | 100201 | 105 | 520.00 | Pagamento de multas anteriores para regularização | 18/06/2024
+10047 | 100423 | 106 | 156.30 | Multa por falta de cinto de segurança do passageiro | 25/11/2023
+10048 | 100298 | 107 | 1780.00 | Seguro básico obrigatório DPVAT anual | 08/04/2024
+10049 | 100145 | 108 | 71.00 | Pedágios de ida e volta na rota para Anápolis | 30/08/2022
+10050 | 100389 | 109 | 145.00 | Lavagem completa com polimento e enceramento | 12/12/2023
+10051 | 100256 | 110 | 380.00 | Instalação de bloqueador veicular antifurto | 21/05/2024
+10052 | 100478 | 111 | 590.00 | Compra de rack de teto para transporte de cargas | 02/10/2022
+10053 | 100112 | 112 | 195.00 | Recarga completa da bateria em estação ultrarrápida | 14/03/2024
+10054 | 100334 | 113 | 85.00 | Pagamento de taxa de emissão de CRV digital | 26/07/2023
+10055 | 100401 | 114 | 415.00 | Instalação de película protetora nos vidros | 07/11/2024
+10056 | 100223 | 101 | 468.90 | Abastecimento diesel comum para trajeto de carga | 19/01/2022
+10057 | 100489 | 102 | 330.00 | Limpeza do sistema de injeção eletrônica | 01/06/2024
+10058 | 100167 | 103 | 1920.00 | Reparo emergencial da caixa de câmbio com vazamento | 23/09/2023
+10059 | 100345 | 104 | 890.00 | Rodízio dos pneus e correção da pressão de ar | 10/02/2024
+10060 | 100412 | 105 | 445.00 | Renovação do licenciamento e vistoria ambiental | 05/08/2022
+10061 | 100189 | 106 | 324.70 | Multa por uso de celular ao volante flagrado por câmera | 17/12/2023
+10062 | 100278 | 107 | 1950.00 | Contratação de seguro com assistência 24h inclusa | 28/04/2024
+10063 | 100456 | 108 | 54.50 | Pedágio da via expressa para acesso ao aeroporto | 11/10/2022
+10064 | 100098 | 109 | 115.00 | Lavagem do motor e limpeza do compartimento | 22/03/2024
+10065 | 100367 | 110 | 340.00 | Recalibração do rastreador após mudança de operadora | 04/07/2023
+10066 | 100234 | 111 | 720.00 | Instalação de farol de milha e luzes auxiliares | 16/11/2024
+10067 | 100445 | 112 | 225.00 | Carregamento rápido em posto de eletricidade | 29/01/2022
+10068 | 100156 | 113 | 125.00 | Taxas de segunda via de documentos do veículo | 09/06/2024
+10069 | 100389 | 114 | 380.00 | Compra de kit completo de ferramentas e macaco | 21/09/2023
+10070 | 100267 | 101 | 495.20 | Abastecimento GNV para economia no consumo urbano | 03/02/2024
+10071 | 100478 | 102 | 385.00 | Verificação e ajuste do sistema de direção hidráulica | 15/08/2022
+10072 | 100123 | 103 | 2450.00 | Substituição do radiador e sistema de arrefecimento | 27/12/2023
+10073 | 100312 | 104 | 1180.00 | Compra de jogo completo de pneus para revezamento | 08/05/2024
+10074 | 100401 | 105 | 515.00 | Pagamento de IPVA atrasado com multa e juros | 20/10/2022
+10075 | 100245 | 106 | 268.40 | Multa por transporte de carga acima do peso permitido | 01/03/2024
+10076 | 100489 | 107 | 1820.00 | Seguro com cobertura para vidros e retrovisores | 13/07/2023
+10077 | 100178 | 108 | 68.00 | Pedágios da rota turística de fim de semana | 25/11/2024
+10078 | 100356 | 109 | 135.00 | Higienização profunda com ozônio e vapor | 06/01/2022
+10079 | 100134 | 110 | 420.00 | Troca da central de rastreamento por modelo avançado | 18/06/2024
+10080 | 100467 | 111 | 650.00 | Instalação de engate para reboque de trailer | 30/09/2023
+10081 | 100201 | 112 | 240.00 | Recarga noturna completa no carregador residencial | 12/02/2024
+10082 | 100423 | 113 | 140.00 | Pagamento de taxa de cadastro em novo sistema | 24/08/2022
+10083 | 100298 | 114 | 475.00 | Compra de kit de primeiros socorros e itens de segurança | 05/12/2023
+10084 | 100145 | 101 | 528.60 | Abastecimento completo para viagem de longa distância | 17/04/2024
+10085 | 100389 | 102 | 365.00 | Revisão dos 20.000 km com troca de filtro de combustível | 29/10/2022
+10086 | 100256 | 103 | 1740.00 | Reparo do sistema elétrico após curto-circuito | 10/03/2024
+10087 | 100478 | 104 | 960.00 | Troca dos pneus traseiros por desgaste natural | 22/07/2023
+10088 | 100112 | 105 | 485.00 | Renovação de licenciamento com débitos quitados | 03/11/2024
+10089 | 100334 | 106 | 378.20 | Multa por estacionamento em vaga de deficiente | 15/01/2022
+10090 | 100401 | 107 | 2080.00 | Seguro total com cobertura internacional | 27/06/2024
+10091 | 100223 | 108 | 48.50 | Pedágio simples na via de acesso à fazenda | 08/09/2023
+10092 | 100489 | 109 | 105.00 | Lavagem básica externa do veículo | 20/02/2024
+10093 | 100167 | 110 | 370.00 | Manutenção preventiva do sistema de rastreamento | 01/08/2022
+10094 | 100345 | 111 | 780.00 | Instalação de para-choque reforçado | 13/12/2023
+10095 | 100412 | 112 | 205.00 | Carregamento emergencial em posto de rodovia | 25/05/2024
+10096 | 100189 | 113 | 115.00 | Taxas de transferência de município | 06/10/2022
+10097 | 100278 | 114 | 395.00 | Compra de caixa organizadora e rede de proteção | 18/03/2024
+10098 | 100456 | 101 | 505.80 | Abastecimento diesel S500 para uso em zona rural | 30/07/2023
+10099 | 100098 | 102 | 425.00 | Troca de bateria e verificação do alternador | 11/11/2024
+10100 | 100123 | 106 | 2500,00 | Multa por excesso de velocidade | 09/11/2001
+10101 | 100231 | 103 | 350,00 | Troca do cambio manual | 10/10/2020
+10102 | 100100 | 109 | 230,00 | Passeio no lava jato | 16/02/2023

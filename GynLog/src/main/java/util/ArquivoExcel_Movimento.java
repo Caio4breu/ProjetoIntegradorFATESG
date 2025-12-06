@@ -1,6 +1,7 @@
 package util;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import model.Movimento;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ public class ArquivoExcel_Movimento {
     public static void Transf_Excel(ArrayList<Movimento> Lista, String Caminho) {
         try(Workbook wb = new XSSFWorkbook()) {
             Sheet sheet = wb.createSheet("Movimento");
-            Caminho = ("Movimento.xlsx");
+            Caminho = "Movimento.xlsx";
             
             Row header = sheet.createRow(0);
             
@@ -30,19 +31,34 @@ public class ArquivoExcel_Movimento {
                 Row row = sheet.createRow(NumLinha++);
                 
                 row.createCell(0).setCellValue(movimento.getIdMovimento());
-                row.createCell(1).setCellValue(movimento.GetIdVeiculo());
+                row.createCell(1).setCellValue(movimento.getIdVeiculo());
                 row.createCell(2).setCellValue(movimento.getIdTipoDespesa());
                 row.createCell(3).setCellValue(movimento.getDescricao());
-                row.createCell(4).setCellValue(movimento.GetData());
+                row.createCell(4).setCellValue(movimento.getData());
+                row.createCell(5).setCellValue(movimento.getValor());
             }
             
             for (int i = 0; i < 6; i++) {
                 sheet.autoSizeColumn(i);
             }
             
-            JOptionPane.showMessageDialog(null, "Exportação em Excel realizada com sucesso!");
+            try (FileOutputStream fos = new FileOutputStream(Caminho)) {
+                wb.write(fos);
+                fos.flush();
+            }
+            
+            JOptionPane.showMessageDialog(null,
+                "Movimento.xlsx: Exportação em Xlsx realizada com sucesso!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+            );
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro na exportação em Excel: " + e.getMessage());
+            JOptionPane.showMessageDialog(null,
+                "Erro na exportação em Excel: " + e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+            );
+            e.printStackTrace();
         }
     }
     

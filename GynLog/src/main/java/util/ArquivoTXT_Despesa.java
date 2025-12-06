@@ -6,48 +6,80 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import model.Movimento;
 import model.TipoDespesa;
 
 public class ArquivoTXT_Despesa {
     private static final String arquivamento = "Despesas.txt";
     private static final String separador = " | ";
 
-    public static void salvarLinha(TipoDespesa despesa) {
+    // Metodo sincroniza com movimento.txt
+    public static void sincronizarComMovimento() {
         try {
-            File arquivo = new File(arquivamento);
-            boolean arquivoVazio = !arquivo.exists() || arquivo.length() == 0;
+            // Lê todos os movimentos
+            ArrayList<Movimento> movimentos = util.ArquivoTXT_Movimento.lerArquivo();
             
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivamento, true))) {
+            // Usa LinkedHashMap para manter ordem e evitar duplicatas
+            Map<Integer, String> tiposDespesa = new LinkedHashMap<>();
+            
+            // Extrai ID Tipo Despesa e Descrição de cada movimento
+            for (Movimento m : movimentos) {
+                tiposDespesa.put(m.getIdTipoDespesa(), m.getDescricao());
+            }
+            
+            // Escreve o arquivo Despesas.txt
+            File arquivo = new File(arquivamento);
+            
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivamento, false))) {
                 
-                // Adiciona cabeçalho se arquivo vazio
-                if (arquivoVazio) {
-                    writer.write("ID Tipo Despesa | Descrição");
+                // Escreve cabeçalho
+                writer.write("ID Tipo Despesa | Descrição");
+                writer.newLine();
+                
+                // Escreve cada tipo de despesa único
+                for (Map.Entry<Integer, String> entry : tiposDespesa.entrySet()) {
+                    StringBuilder Linha = new StringBuilder();
+                    Linha.append(entry.getKey()).append(separador);
+                    Linha.append(entry.getValue());
+                    
+                    writer.write(Linha.toString());
                     writer.newLine();
                 }
                 
-                // Monta a linha da despesa
-                StringBuilder Linha = new StringBuilder();
-                Linha.append(despesa.getIdTipoDespesa()).append(separador);
-                Linha.append(despesa.getDescricao());
-                
-                writer.write(Linha.toString());
-                writer.newLine();
                 writer.flush();
             }
+            
+            // Mensagem de sucesso
+            JOptionPane.showMessageDialog(null,
+                "Despesas.txt: Exportação em Txt realizada com sucesso!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, 
-                "Erro ao salvar no arquivo Despesas.txt: " + e.getMessage(),
-                "Erro de Gravação",
+                "Erro ao sincronizar Despesas.txt: " + e.getMessage(),
+                "Erro de Sincronização",
                 JOptionPane.ERROR_MESSAGE
             );
         }
     }
     
+    
     public static ArrayList<TipoDespesa> lerArquivo() {
         ArrayList<TipoDespesa> Lista = new ArrayList<>();
         File arquivo = new File(arquivamento);
+        
+        // <<<< SINCRONIZA PRIMEIRO (se Movimento.txt existir)
+        File movimentoFile = new File("Movimento.txt");
+        if (movimentoFile.exists()) {
+            sincronizarComMovimento();
+        }
         
         if (!arquivo.exists()) {
             return Lista;
@@ -62,12 +94,10 @@ public class ArquivoTXT_Despesa {
                 numeroLinha++;
                 Linha = Linha.trim();
                 
-                // Pula linhas vazias
                 if (Linha.isEmpty()) {
                     continue;
                 }
                 
-                // Pula cabeçalho
                 if (primeiraLinha) {
                     primeiraLinha = false;
                     if (Linha.startsWith("ID") || Linha.contains("Tipo")) {
@@ -77,9 +107,8 @@ public class ArquivoTXT_Despesa {
                 
                 String[] Partes = Linha.split("\\s*\\|\\s*");
                 
-                // Validação de formato
                 if (Partes.length < 2) {
-                    System.err.println("⚠ Linha " + numeroLinha + " inválida no Despesas.txt: " + Linha);
+                    System.err.println("Linha " + numeroLinha + " inválida no Despesas.txt: " + Linha);
                     continue;
                 }
                 
@@ -100,6 +129,13 @@ public class ArquivoTXT_Despesa {
                 JOptionPane.ERROR_MESSAGE
             );
         }
+        
         return Lista;
+    }
+    
+    // metodo em desuso (mantido por compatibilidade)
+    @Deprecated
+    public static void salvarLinha(TipoDespesa despesa) {
+        // Este método não é mais usado
     }
 }

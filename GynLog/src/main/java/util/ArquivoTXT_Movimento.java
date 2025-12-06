@@ -6,12 +6,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Movimento;
 
 public class ArquivoTXT_Movimento {
-    private static final String arquivamento = "Financeiro.txt";
+    private static final String arquivamento = "Movimento.txt";
     private static final String separador = " | ";
     
     public static void salvarLinha(Movimento movimento) {
@@ -19,6 +20,22 @@ public class ArquivoTXT_Movimento {
             File arquivo = new File(arquivamento);
             boolean arquivoVazio = !arquivo.exists() || arquivo.length() == 0;
             
+                
+                if (!arquivoVazio && arquivo.length() > 0) {
+                    try (RandomAccessFile raf = new RandomAccessFile(arquivo, "r")) {
+                        if (raf.length() > 0) {
+                            raf.seek(raf.length() - 1);
+                            byte ultimoByte = raf.readByte();
+                            if(ultimoByte != '\n' && ultimoByte != '\r') {
+                                try (FileWriter fw = new FileWriter(arquivo, true)) {
+                                    fw.write(System.lineSeparator());
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivamento, true))) {
                 
                 // Adiciona cabeçalho se arquivo estiver vazio
@@ -30,19 +47,26 @@ public class ArquivoTXT_Movimento {
                 // Monta a linha no registro
                 StringBuilder Linha = new StringBuilder();
                 Linha.append(movimento.getIdMovimento()).append(separador);
-                Linha.append(movimento.GetIdVeiculo()).append(separador);
+                Linha.append(movimento.getIdVeiculo()).append(separador);
                 Linha.append(movimento.getIdTipoDespesa()).append(separador);
-                Linha.append(String.format("%.2f", movimento.GetValor())).append(separador);
+                Linha.append(String.format("%.2f", movimento.getValor())).append(separador);
                 Linha.append(movimento.getDescricao()).append(separador);
-                Linha.append(movimento.GetData());
+                Linha.append(movimento.getData());
                 
                 writer.write(Linha.toString());
                 writer.newLine();
                 writer.flush();
             }
+            
+            JOptionPane.showMessageDialog(null,
+                "Movimento.txt: Exportação em Txt realizada com sucesso!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, 
-                "Erro ao salvar no arquivo Financeiro.txt: " + e.getMessage(),
+                "Erro ao salvar no arquivo Movimento.txt: " + e.getMessage(),
                 "Erro de Gravação",
                 JOptionPane.ERROR_MESSAGE
             );
@@ -71,8 +95,11 @@ public class ArquivoTXT_Movimento {
                 }
                 
                 if (primeiraLinha) {
+                    primeiraLinha = false;
                     continue;
                 }
+                
+                String[] Partes = Linha.split("\\s*\\|\\s*");
                 
                 if (primeiraLinha) {
                     primeiraLinha = false;
@@ -80,8 +107,6 @@ public class ArquivoTXT_Movimento {
                         continue;
                     }
                 }
-                
-                String[] Partes = Linha.split("\\s*\\|\\s*");
                 
                 // Validação de formato
                 if (Partes.length < 6) {
@@ -96,10 +121,11 @@ public class ArquivoTXT_Movimento {
                     double custo = Double.parseDouble(Partes[3].replace(",","."));
                     String Desc = Partes[4];
                     String dataRegist = Partes[5];
+                    
                     Movimento movimento = new Movimento(idMovi, idVEIC, idTipoDES, custo, Desc, dataRegist);
                     Lista.add(movimento);
                 } catch (NumberFormatException e) {
-                    System.err.println("⚠ Erro ao processar linha " + numeroLinha + ": " + Linha);
+                    System.err.println("Erro ao processar linha " + numeroLinha + ": " + Linha);
                     System.err.println("  Detalhes: " + e.getMessage());
                 }
             }

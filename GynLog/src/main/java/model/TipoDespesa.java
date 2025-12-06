@@ -4,7 +4,7 @@ public class TipoDespesa {
     private int idTipoDespesa;
     private String descricao;
     
-    public TipoDespesa(int IdTipoDespesa, String descricao) {
+    public TipoDespesa(int idTipoDespesa, String descricao) {
         this.idTipoDespesa = idTipoDespesa;
         this.descricao = descricao;
     }
