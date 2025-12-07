@@ -1,38 +1,19 @@
 # **GynLog**
 Desenvolvimento de uma solução para o gerenciamento financeiro da empresa fictícia GynLog, utilizando um software em Java (Swing), o sistema deve permitir registro, categorização e eemissão de relatórios de despsas e armazenamento de dados em arquivos de texto (.txt).
 
-## **Origem do Projeto**
+## Como rodar o programa?
+O projeto se utiliza de bibliotecas externas, por conta desse motivo apenas descompactar o arquivo ZIP não é o suficiente para a execução do projeto.
 
-O desenvolvimento teve início na atividade final do segundo semestre do curso de Ads, na Fatesg.
+A seguir se encontra os tutoriais de uso:
 
-A atividae, chamada *Projeto Integrador*, será apresentada diante de uma banca de professores
+### Opção 1: Baixe o repositorio inteiro
+#### Melhor opção!
+Faça o download do projeto pelo GitHub: 	[ProjetoIntegradorFATESG](https://github.com/Caio4breu/ProjetoIntegradorFATESG)
 
-### **Banca**
-Professores:
 
-- Professor1
-  - Disciplina1
-- Professor2
-  - Disciplina2
-- Professor3
-  - Disciplina3
-- Professor4
-  - Disciplina4
-- Professor5
-  - Disciplina5
+### Opção 2: Descompacte o arquivo ZIP e ao abrir o projeto GynLog no NetBeans Apache 28
+Clica com o botão direito no Projeto GynLog e selectione a opção **"Reload Project"**
 
-## Funcionalidades
-### Registro de Véiculos
-Todos os veículos são registrados com as seguintes informações
-
-- Id do Veículo (automatico)
-- Placa (Placa Mercosul ou Placa Cinza)
-- Modelo do veículo
-- Marca do veículo
-- Ano de Fabricação
-- Disponibilidade
-
-### Registro de Movimentação
 
 ## Ferramentas
 - NetBeans Apache 28
