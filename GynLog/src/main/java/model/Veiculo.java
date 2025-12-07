@@ -15,26 +15,26 @@ public class Veiculo {
         this.Status = Status;
     }
     
-    // Getters e Setters ---------------------------------------------------------------------------------------------------------------------   
-    public int getIdVeiculo(){ return idVeiculo;} // ID Veiculo ----------------------------------------------------------------------
+    // Getters e Setters -------------------------------------------------------
+    public int getIdVeiculo(){ return idVeiculo;} // ID Veiculo ----------------
     public void setIdVeiculo(int idVeiculo){ this.idVeiculo = idVeiculo; }
     
-    public String getMarca(){ return marca; } // Marca -----------------------------------------------------------------------------
+    public String getMarca(){ return marca; } // Marca -------------------------
     public void setMarca(String marca){ this.marca = marca; }
     
-    public String getModelo(){ return modelo; } // Modelo -------------------------------------------------------------------------
+    public String getModelo(){ return modelo; } // Modelo ----------------------
     public void setModelo(String modelo){ this.modelo = modelo; }
     
-    public String getPlaca(){ return placa; } // Placa --------------------------------------------------------------------------------
+    public String getPlaca(){ return placa; } // Placa -------------------------
     public void setPlaca(String placa){ this.placa = placa; }
     
-    public int getanoFabricacao(){ return anoFabricacao; } // Ano Fabricado ------------------------------------------------
+    public int getanoFabricacao(){ return anoFabricacao; } // Ano Fabricado ----
     public void setanoFabricacao(int anoFabricacao){ this.anoFabricacao = anoFabricacao; }
     
-    public boolean isStatus(){ return Status; } // Disponibilidade ----------------------------------------------------------------
+    public boolean isStatus(){ return Status; } // Disponibilidade -------------
     public void setAtivo(boolean status){ this.Status = status; }
     
-    public String getStatusTextual() { // Versão Textual da Disponibilidade --------------------------------------------------
+    public String getStatusTextual() { // Versão Textual da Disponibilidade ----
         return Status ? "Disponível" : "Indisponível";
     }
 }

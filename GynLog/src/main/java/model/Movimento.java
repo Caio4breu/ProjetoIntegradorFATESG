@@ -26,4 +26,22 @@ public class Movimento extends TipoDespesa {
     
     public String getData() { return data; }
     public void setData(String data) { this.data = data; }
+    
+    public int getAno() {
+        if (data == null || data.isEmpty()) {
+            return -1;
+        }
+        
+        try {
+            // A data está no formato dd/MM/yyyy, então o ano está após a segunda barra
+            String[] partes = data.split("/");
+            if (partes.length == 3) {
+                return Integer.parseInt(partes[2]);
+            }
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.err.println("Erro ao extrair ano da data: " + data);
+        }
+        
+        return -1;
+    }
 }

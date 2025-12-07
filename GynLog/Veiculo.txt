@@ -500,3 +500,4 @@ ID do Veículo | Placa | Marca | Modelo | Ano | Disponibilidade
 100498 | MVY8L68 | Scania | P360 | 2024 | Disponível
 100499 | KBM8T69 | Renault | Master | 2013 | Indisponível
 100500 | ABC1234 | Volkswagen | Amarok | 2020 | Disponível
+100501 | ABC1235 | Mercedes-Benz | Accelo 1016 | 1992 | Indisponível

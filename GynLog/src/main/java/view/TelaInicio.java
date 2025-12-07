@@ -8,9 +8,9 @@ public class TelaInicio extends javax.swing.JFrame {
     
     public TelaInicio() {
         initComponents();
-        ThemeAdm.applyTheme(this);
-        ThemeAdm.addRememberOnClose(this);
+        ThemeAdm.applyThemeAndSetup(this);
         setLocationRelativeTo(null);
+        this.setTitle("GynLog");
     }
     
     @SuppressWarnings("unchecked")
@@ -55,7 +55,7 @@ public class TelaInicio extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("  O que o senhor(a) deseja?");
+        jLabel2.setText("Serviços:");
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Eras Bold ITC", 3, 90)); // NOI18N
@@ -131,7 +131,7 @@ public class TelaInicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelTelaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,18 +148,17 @@ public class TelaInicio extends javax.swing.JFrame {
        logger.info("Redirecionando para tela de Registro de Movimentações...");
         new TelaRegistroPrejuizo().setVisible(true);
         this.dispose();
-        this.setTitle("GynLog");
     }//GEN-LAST:event_jButtonRegistrarMovimentaçõesActionPerformed
 
     private void jButtonVerRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerRelatoriosActionPerformed
         logger.info("Redirecionando para tela de Relatórios...");
-        new TelaRegistroVeiculo().setVisible(true);
+        new telaGerarRelatorios().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVerRelatoriosActionPerformed
 
     private void jButtonRegistrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarVeiculoActionPerformed
         logger.info("Redirecionando para tela de Registro de Veículos...");
-        new TelaListaVeiculo().setVisible(true);
+        new TelaRegistroVeiculo().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegistrarVeiculoActionPerformed
 

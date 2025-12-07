@@ -60,7 +60,7 @@ public class ArquivoTXT_Veiculo {
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, 
-                    "Erro ao salvr no arquivo TXT: " + e.getMessage(),
+                    "Erro ao salvar no arquivo TXT: " + e.getMessage(),
                     "Erro de Gravação", 
                     JOptionPane.ERROR_MESSAGE
             );
