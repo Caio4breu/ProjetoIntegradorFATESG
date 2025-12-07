@@ -8,6 +8,7 @@ public class TelaInicio extends javax.swing.JFrame {
     
     public TelaInicio() {
         initComponents();
+        ThemeAdm.setTheme(ThemeAdm.loadSavedTheme());
         ThemeAdm.applyThemeAndSetup(this);
         setLocationRelativeTo(null);
         this.setTitle("GynLog");

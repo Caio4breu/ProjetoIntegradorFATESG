@@ -1000,8 +1000,13 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        jBtnListaMovimento.setText("Lista de fincanças");
+        jBtnListaMovimento.setText("Detalhes das movimentações");
         jBtnListaMovimento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnListaMovimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnListaMovimentoActionPerformed(evt);
+            }
+        });
 
         jBtnExit.setText("Fechar programa");
         jBtnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -1031,7 +1036,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jBtnListaVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                    .addComponent(jBtnListaVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jBtnRegistrarNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jBtnRegistrarMovimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jBtnListaMovimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1266,7 +1271,8 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRegistrarNovoActionPerformed
 
     private void jBtnRegistrarMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarMovimentoActionPerformed
-        // TODO add your handling code here:
+        new TelaRegistroPrejuizo().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBtnRegistrarMovimentoActionPerformed
 
     private void jBtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExitActionPerformed
@@ -1300,6 +1306,11 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
     private void jCBDisponibilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBDisponibilidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBDisponibilidadeActionPerformed
+
+    private void jBtnListaMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnListaMovimentoActionPerformed
+        new telaGerarRelatorios().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBtnListaMovimentoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

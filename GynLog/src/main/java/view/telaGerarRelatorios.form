@@ -360,7 +360,7 @@
                                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jBtnTema" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                                          <Component id="jButton1" alignment="0" pref="189" max="32767" attributes="0"/>
+                                          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
@@ -391,9 +391,9 @@
                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="jBtnTema" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
@@ -438,7 +438,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lista de fincan&#xe7;as"/>
+                <Property name="text" type="java.lang.String" value="Detalhes das movimenta&#xe7;&#xf5;es"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
               <Events>

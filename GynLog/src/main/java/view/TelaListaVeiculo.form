@@ -113,6 +113,8 @@
                       <Group type="102" attributes="0">
                           <Component id="jBtnTema1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jbtnInicio" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jBtnDisponib" min="-2" pref="179" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -146,6 +148,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jBtnTema1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBtnDisponib" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
@@ -260,6 +263,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Selecione um ou mais linhas para alterar disponibilidade ou exclus&#xe3;o"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnInicio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Menu inicial"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnInicioActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

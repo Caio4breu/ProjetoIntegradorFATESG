@@ -19,6 +19,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
         configurarComponentes();
         setLocationRelativeTo(null);
         this.setTitle("GynLog");
+        ThemeAdm.setTheme(ThemeAdm.loadSavedTheme());
         ThemeAdm.applyThemeAndSetup(this);
     }
     
@@ -1143,6 +1144,11 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
 
         jBtnListaMovimento.setText("Lista de fincanças");
         jBtnListaMovimento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnListaMovimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnListaMovimentoActionPerformed(evt);
+            }
+        });
 
         jBtnExit.setText("Fechar programa");
         jBtnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -1243,7 +1249,8 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnRegistrarNovoActionPerformed
 
     private void jBtnRegistrarMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarMovimentoActionPerformed
-        // TODO add your handling code here:
+        new TelaRegistroPrejuizo().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBtnRegistrarMovimentoActionPerformed
 
     private void jBtnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnHomeActionPerformed
@@ -1272,6 +1279,11 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
         }
         ThemeAdm.applyTheme(this);
     }//GEN-LAST:event_jBtnTemaActionPerformed
+
+    private void jBtnListaMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnListaMovimentoActionPerformed
+        new telaGerarRelatorios().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBtnListaMovimentoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

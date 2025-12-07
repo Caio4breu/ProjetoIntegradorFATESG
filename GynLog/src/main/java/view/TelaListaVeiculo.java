@@ -21,6 +21,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         configurarSelecaoTabela();
         setLocationRelativeTo(null);
         this.setTitle("GynLog");
+        ThemeAdm.setTheme(ThemeAdm.loadSavedTheme());
         ThemeAdm.applyThemeAndSetup(this);
     }
     
@@ -463,6 +464,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         jBtnTema1 = new javax.swing.JButton();
         jBtnDisponib = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jbtnInicio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -541,6 +543,13 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
 
         jLabel2.setText("Selecione um ou mais linhas para alterar disponibilidade ou exclusão");
 
+        jbtnInicio.setText("Menu inicial");
+        jbtnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnInicioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -551,6 +560,8 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jBtnTema1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnInicio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnDisponib, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -577,7 +588,8 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnTema1)
-                    .addComponent(jBtnDisponib))
+                    .addComponent(jBtnDisponib)
+                    .addComponent(jbtnInicio))
                 .addGap(10, 10, 10))
         );
 
@@ -628,6 +640,11 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         alternarDisponibilidadeVeiculo();
     }//GEN-LAST:event_jBtnDisponibActionPerformed
 
+    private void jbtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnInicioActionPerformed
+        new TelaInicio().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbtnInicioActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -677,5 +694,6 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTDados;
+    private javax.swing.JButton jbtnInicio;
     // End of variables declaration//GEN-END:variables
 }

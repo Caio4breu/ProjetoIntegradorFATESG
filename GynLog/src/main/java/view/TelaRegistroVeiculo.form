@@ -360,7 +360,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jBtnListaVeiculos" alignment="0" pref="189" max="32767" attributes="0"/>
+                                      <Component id="jBtnListaVeiculos" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jBtnRegistrarNovo" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jBtnRegistrarMovimento" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jBtnListaMovimento" alignment="0" max="32767" attributes="0"/>
@@ -442,9 +442,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBtnListaMovimento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lista de fincan&#xe7;as"/>
+            <Property name="text" type="java.lang.String" value="Detalhes das movimenta&#xe7;&#xf5;es"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnListaMovimentoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBtnExit">
           <Properties>
