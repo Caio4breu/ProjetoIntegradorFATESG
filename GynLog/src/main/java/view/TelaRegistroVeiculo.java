@@ -770,6 +770,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
         jBtnListaMovimento = new javax.swing.JButton();
         jBtnExit = new javax.swing.JButton();
         jBtnTema = new javax.swing.JButton();
+        jBtnListaMovimento1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1000,7 +1001,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        jBtnListaMovimento.setText("Detalhes das movimentações");
+        jBtnListaMovimento.setText("Gerar relatórios");
         jBtnListaMovimento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBtnListaMovimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1022,6 +1023,14 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
             }
         });
 
+        jBtnListaMovimento1.setText("Pesquisar veículos");
+        jBtnListaMovimento1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBtnListaMovimento1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnListaMovimento1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1040,8 +1049,9 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                                     .addComponent(jBtnRegistrarNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jBtnRegistrarMovimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jBtnListaMovimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jBtnTema))))
-                        .addGap(0, 26, Short.MAX_VALUE))
+                                    .addComponent(jBtnTema)
+                                    .addComponent(jBtnListaMovimento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnExit)))
@@ -1060,7 +1070,9 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 .addComponent(jBtnRegistrarMovimento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnListaMovimento)
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnListaMovimento1)
+                .addGap(18, 18, 18)
                 .addComponent(jBtnTema)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addComponent(jBtnExit)
@@ -1312,6 +1324,11 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnListaMovimentoActionPerformed
 
+    private void jBtnListaMovimento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnListaMovimento1ActionPerformed
+        new TelaPesquisaVeiculo().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBtnListaMovimento1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1350,6 +1367,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
     private javax.swing.JButton jBtnExit;
     private javax.swing.JButton jBtnHome;
     private javax.swing.JButton jBtnListaMovimento;
+    private javax.swing.JButton jBtnListaMovimento1;
     private javax.swing.JButton jBtnListaVeiculos;
     private javax.swing.JButton jBtnRegistrar;
     private javax.swing.JButton jBtnRegistrarMovimento;
