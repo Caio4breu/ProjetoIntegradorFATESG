@@ -1080,7 +1080,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1143,7 +1143,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
             }
         });
 
-        jBtnListaMovimento.setText("Detalhes das movimentações");
+        jBtnListaMovimento.setText("Gerar relatórios");
         jBtnListaMovimento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBtnListaMovimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

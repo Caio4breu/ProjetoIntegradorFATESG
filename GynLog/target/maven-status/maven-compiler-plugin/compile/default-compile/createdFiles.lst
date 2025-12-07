@@ -9,6 +9,9 @@ view\TelaRegistroVeiculo$8.class
 util\ArquivoExcel_Movimento.class
 util\relatorioVeiculosInativos.class
 view\TelaPesquisaVeiculo$2.class
+view\TelaRegistroVeiculo$24.class
+view\TelaRegistroPrejuizo$13.class
+view\TelaListaVeiculo$6.class
 view\TelaListaVeiculo$3.class
 view\TelaRegistroVeiculo$12.class
 view\TelaListaVeiculo.class
@@ -60,6 +63,7 @@ view\TelaPesquisaVeiculo$9.class
 util\relatorioDespesasVeiculo.class
 view\TelaListaVeiculo$FiltroDisponibilidade.class
 view\TelaPesquisaVeiculo$7$1.class
+view\TelaPesquisaVeiculo$19.class
 view\TelaRegistroVeiculo$6.class
 util\ArquivoTXT_Despesa.class
 view\TelaRegistroPrejuizo$2.class
@@ -71,9 +75,12 @@ view\TelaRegistroVeiculo$1$1.class
 model\Veiculo.class
 view\TelaRegistroPrejuizo$3.class
 view\TelaRegistroVeiculo$7.class
+view\TelaPesquisaVeiculo$18.class
 view\TelaSlash$1.class
+view\TelaRegistroPrejuizo$14.class
 view\TelaListaVeiculo$2.class
 view\TelaRegistroVeiculo$15.class
+view\TelaRegistroVeiculo$25.class
 view\TelaPesquisaVeiculo$11.class
 view\TelaPesquisaVeiculo$6.class
 view\TelaRegistroPrejuizo$9.class

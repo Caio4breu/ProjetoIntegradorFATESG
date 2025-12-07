@@ -118,7 +118,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="528" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="529" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -322,7 +322,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBtnListaMovimento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Detalhes das movimenta&#xe7;&#xf5;es"/>
+            <Property name="text" type="java.lang.String" value="Gerar relat&#xf3;rios"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
