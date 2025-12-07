@@ -52,10 +52,9 @@ public class TelaSlash extends javax.swing.JFrame {
     
     private void configurarJanela() {
         setLocationRelativeTo(null);
-        jPBLoading.setForeground(new java.awt.Color(123, 75, 240));
-        jPBLoading.setBackground(new java.awt.Color(40, 40, 40));
         
-        // Define tamanho fixo ultrafino (5px)
+        
+        // Barra de carregamento (altura 5px) ----------------------------------
         jPBLoading.setPreferredSize(new java.awt.Dimension(jPBLoading.getPreferredSize().width, 10));
         
         // Inicia barra de progresso em 0 --------------------------------------
@@ -77,7 +76,7 @@ public class TelaSlash extends javax.swing.JFrame {
                 while (progresso <= 100) {
                     publish(progresso);
                     
-                    // Delay variável para parecer mais natural ----------------------------------------------------------------------------------------------------
+                    // Delay variável para parecer mais natural ----------------
                     int delay = delayBase + random.nextInt(120); // 200-300ms
                     Thread.sleep(delay);
                     

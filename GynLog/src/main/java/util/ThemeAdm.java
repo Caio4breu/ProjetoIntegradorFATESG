@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
@@ -46,6 +47,7 @@ public class ThemeAdm {
     private static final Color LIGHT_TABLE_TEXT = hex("#202124"); // texto na JTable
     private static final Color LIGHT_TABLE_SELECTION = hex("#E8F0FE"); // seleção da JTable
     private static final Color LIGHT_FOCUS = hex("#1A73E8"); // borda de foco
+    private static final Color LIGHT_PROGRESSBAR = hex("#1A73E8"); // azul Google (barra de progresso)
     
     // Cores modo ESCURO -------------------------------------------------------
     private static final Color DARK_BACKGROUND = hex("#000000"); // Fundo Geral (Azul Escuro Profundo)
@@ -58,6 +60,7 @@ public class ThemeAdm {
     private static final Color DARK_TABLE_TEXT = hex("#E8EAED");
     private static final Color DARK_TABLE_SELECTION = hex("#3A445C");
     private static final Color DARK_FOCUS = hex("#8AB4F8");
+    private static final Color DARK_PROGRESSBAR = hex("#8AB4F8"); // azul claro (barra de progresso)
 
 
 
@@ -77,6 +80,7 @@ return temaAtual == Theme.LIGHT ? LIGHT_BUTTON_TEXT : DARK_BUTTON_TEXT;
     public static Color getTableTextColor() { return temaAtual == Theme.LIGHT ? LIGHT_TABLE_TEXT : DARK_TABLE_TEXT; }
     public static Color getTableSelectionColor() { return temaAtual == Theme.LIGHT ? LIGHT_TABLE_SELECTION : DARK_TABLE_SELECTION; }
     public static Color getFocusBorderColor() { return temaAtual == Theme.LIGHT ? LIGHT_FOCUS : DARK_FOCUS; }
+    public static Color getProgressBarColor() { return temaAtual == Theme.LIGHT ? LIGHT_PROGRESSBAR : DARK_PROGRESSBAR; }
    
     // Conversão de hex string para color
     private static Color hex(String hex) {
@@ -193,11 +197,14 @@ return temaAtual == Theme.LIGHT ? LIGHT_BUTTON_TEXT : DARK_BUTTON_TEXT;
         }
         
         if (c instanceof JComponent jc) {
-            // borda de foco simples (pode ser expandida para usar BorderFactory) ???
             jc.putClientProperty("JComponent.focusedBackground", getFocusBorderColor());
         }
         
-        // componentes genéricos: tenta aplicar cor de texto
+        if (c instanceof JProgressBar progressBar) {
+            progressBar.setForeground(getProgressBarColor());
+            progressBar.setBackground(getPanelColor());
+        }
+        
         if (!(c instanceof JLabel) && !(c instanceof JButton) && !(c instanceof JTable) && !(c instanceof JPanel)) {
             try {
                 c.setForeground(getTextColor());
