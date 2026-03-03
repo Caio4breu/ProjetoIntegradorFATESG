@@ -61,7 +61,7 @@ mvn exec:java
 
 | Integrante |
 |---|
-| Alexander ([Alexsanei](https://github.com/Alexsanei)) |
+| Alexander Almeida ([Alexsanei](https://github.com/Alexsanei)) |
 | Caio Abreu ([Caio4breu](https://github.com/Caio4breu)) |
 | Cassiano Abreu ([Nomscodes](https://github.com/Nomscodes)) |
 | Gabriel Naoki ([GabrielNaokiUT](https://github.com/GabrielNaokiUT)) |
