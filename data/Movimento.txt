@@ -1,0 +1,96 @@
+ID Movimento | ID Veículo | ID Tipo Despesa | Valor | Descrição | Data
+1 | 100000 | 107 | 1770.99 | Seguro carga especial | 22/01/2024
+2 | 100000 | 105 | 416.20 | Vistoria anual | 22/11/2024
+3 | 100000 | 108 | 212.34 | Pedágios rota Goiânia-SP | 18/08/2024
+4 | 100005 | 104 | 1179.17 | Troca pneu traseiro furado | 29/06/2024
+5 | 100005 | 106 | 426.32 | Multa avanço de sinal | 07/07/2024
+6 | 100005 | 106 | 375.26 | Multa avanço de sinal | 26/02/2024
+7 | 100005 | 106 | 313.06 | Infração BR-153 | 09/09/2024
+8 | 100005 | 109 | 255.48 | Lavagem completa | 30/03/2024
+9 | 100006 | 108 | 179.47 | Pedágios rota GO-MG | 11/09/2024
+10 | 100006 | 104 | 1860.27 | Troca de 4 pneus | 03/05/2024
+11 | 100006 | 107 | 2538.20 | Seguro carga especial | 23/03/2024
+12 | 100006 | 102 | 1970.44 | Troca de óleo e filtros | 22/03/2024
+13 | 100007 | 106 | 596.63 | Multa por excesso de velocidade | 15/01/2024
+14 | 100007 | 102 | 2399.73 | Troca de óleo e filtros | 27/06/2024
+15 | 100007 | 101 | 837.94 | Abastecimento rota SP-GO | 06/09/2024
+16 | 100007 | 108 | 136.38 | Pedágios rota GO-MG | 12/08/2024
+17 | 100007 | 105 | 627.52 | Renovação do licenciamento | 27/07/2024
+18 | 100010 | 102 | 2140.87 | Alinhamento e balanceamento | 29/10/2024
+19 | 100010 | 103 | 2680.54 | Reparo no sistema de freios | 17/03/2024
+20 | 100010 | 105 | 1671.88 | IPVA 2024 | 21/06/2024
+21 | 100010 | 104 | 2235.44 | Troca de 4 pneus | 31/08/2024
+22 | 100010 | 109 | 342.72 | Higienização interna | 07/10/2024
+23 | 100010 | 106 | 565.55 | Multa por excesso de velocidade | 27/05/2024
+24 | 100010 | 103 | 3284.75 | Troca da embreagem | 29/01/2024
+25 | 100015 | 108 | 265.04 | Pedágios rota Goiânia-SP | 22/05/2024
+26 | 100015 | 104 | 1005.37 | Troca pneu traseiro furado | 29/08/2024
+27 | 100015 | 109 | 329.03 | Higienização interna | 21/04/2024
+28 | 100015 | 102 | 1271.42 | Troca de óleo e filtros | 09/01/2024
+29 | 100015 | 109 | 229.71 | Lavagem completa | 30/05/2024
+30 | 100020 | 103 | 1370.55 | Reparo no diferencial | 03/10/2024
+31 | 100020 | 101 | 711.93 | Abastecimento diesel | 05/04/2024
+32 | 100020 | 109 | 137.23 | Lavagem completa | 09/10/2024
+33 | 100022 | 102 | 1431.51 | Troca de óleo e filtros | 01/05/2024
+34 | 100022 | 101 | 1103.58 | Abastecimento rota SP-GO | 21/06/2024
+35 | 100022 | 108 | 237.52 | Pedágios rota GO-MG | 02/01/2024
+36 | 100022 | 101 | 717.19 | Abastecimento rota SP-GO | 01/11/2024
+37 | 100022 | 108 | 74.15 | Pedágios entrega mensal | 25/10/2024
+38 | 100022 | 107 | 2700.26 | Seguro carga especial | 07/08/2024
+39 | 100025 | 102 | 594.91 | Alinhamento e balanceamento | 26/10/2024
+40 | 100025 | 104 | 917.75 | Troca de 4 pneus | 12/11/2024
+41 | 100025 | 105 | 1041.49 | Renovação do licenciamento | 25/04/2024
+42 | 100025 | 105 | 1400.90 | IPVA 2024 | 21/02/2024
+43 | 100025 | 102 | 2256.73 | Alinhamento e balanceamento | 09/07/2024
+44 | 100025 | 101 | 717.03 | Abastecimento diesel | 16/11/2024
+45 | 100025 | 108 | 70.23 | Pedágios entrega mensal | 10/09/2024
+46 | 100027 | 101 | 515.20 | Abastecimento mensal | 13/09/2024
+47 | 100027 | 104 | 1723.35 | Troca pneu traseiro furado | 15/03/2024
+48 | 100027 | 101 | 802.78 | Abastecimento mensal | 10/09/2024
+49 | 100027 | 104 | 1838.11 | Recapagem dianteira | 20/09/2024
+50 | 100027 | 104 | 1923.40 | Troca pneu traseiro furado | 16/04/2024
+51 | 100027 | 103 | 931.38 | Reparo no diferencial | 04/06/2024
+52 | 100027 | 105 | 1028.34 | Vistoria anual | 13/02/2024
+53 | 100029 | 104 | 2146.69 | Troca pneu traseiro furado | 05/11/2024
+54 | 100029 | 107 | 1541.30 | Seguro carga especial | 21/09/2024
+55 | 100029 | 107 | 2975.04 | Parcela seguro anual | 16/11/2024
+56 | 100030 | 107 | 1837.62 | Seguro carga especial | 29/07/2024
+57 | 100030 | 101 | 1032.75 | Abastecimento rota SP-GO | 19/07/2024
+58 | 100030 | 108 | 261.68 | Pedágios entrega mensal | 06/02/2024
+59 | 100030 | 102 | 2528.16 | Alinhamento e balanceamento | 25/06/2024
+60 | 100030 | 106 | 341.86 | Multa por excesso de velocidade | 18/10/2024
+61 | 100030 | 103 | 1962.73 | Troca da embreagem | 26/08/2024
+62 | 100035 | 103 | 2336.44 | Reparo no sistema de freios | 04/10/2024
+63 | 100035 | 102 | 786.93 | Troca de óleo e filtros | 04/11/2024
+64 | 100035 | 106 | 412.73 | Multa por excesso de velocidade | 08/09/2024
+65 | 100035 | 106 | 255.64 | Infração BR-153 | 14/08/2024
+66 | 100037 | 109 | 164.08 | Lavagem completa | 12/01/2024
+67 | 100037 | 104 | 1324.51 | Recapagem dianteira | 26/10/2024
+68 | 100037 | 101 | 873.05 | Abastecimento rota SP-GO | 14/01/2024
+69 | 100037 | 103 | 1591.16 | Troca da embreagem | 14/10/2024
+70 | 100037 | 101 | 404.43 | Abastecimento rota SP-GO | 23/07/2024
+71 | 100037 | 106 | 481.31 | Multa avanço de sinal | 31/03/2024
+72 | 100039 | 106 | 500.51 | Infração BR-153 | 19/06/2024
+73 | 100039 | 106 | 536.20 | Multa por excesso de velocidade | 19/04/2024
+74 | 100039 | 105 | 1165.42 | Renovação do licenciamento | 17/11/2024
+75 | 100039 | 106 | 159.15 | Multa avanço de sinal | 18/11/2024
+76 | 100039 | 101 | 564.28 | Abastecimento mensal | 17/03/2024
+77 | 100039 | 109 | 114.96 | Higienização interna | 19/05/2024
+78 | 100039 | 104 | 2172.98 | Recapagem dianteira | 17/05/2024
+79 | 100046 | 104 | 1404.95 | Troca pneu traseiro furado | 08/03/2024
+80 | 100046 | 105 | 1355.62 | IPVA 2024 | 31/10/2024
+81 | 100046 | 102 | 3372.65 | Troca de óleo e filtros | 13/11/2024
+82 | 100046 | 108 | 241.06 | Pedágios rota Goiânia-SP | 06/04/2024
+83 | 100050 | 108 | 297.85 | Pedágios rota GO-MG | 18/07/2024
+84 | 100050 | 108 | 294.00 | Pedágios rota Goiânia-SP | 02/04/2024
+85 | 100050 | 109 | 270.15 | Polimento e lavagem | 04/03/2024
+86 | 100050 | 104 | 1928.88 | Troca pneu traseiro furado | 14/01/2024
+87 | 100050 | 102 | 3207.78 | Revisão dos 30.000 km | 24/01/2024
+88 | 100050 | 109 | 98.14 | Higienização interna | 27/11/2024
+89 | 100059 | 109 | 315.13 | Lavagem completa | 11/05/2024
+90 | 100059 | 104 | 1673.95 | Troca de 4 pneus | 01/01/2024
+91 | 100059 | 105 | 1205.03 | IPVA 2024 | 24/07/2024
+92 | 100059 | 108 | 252.84 | Pedágios entrega mensal | 19/02/2024
+93 | 100059 | 106 | 127.58 | Infração BR-153 | 27/01/2024
+94 | 100059 | 107 | 1684.79 | Renovação apólice frota | 23/02/2024
+95 | 100059 | 107 | 2529.33 | Parcela seguro anual | 14/01/2024
