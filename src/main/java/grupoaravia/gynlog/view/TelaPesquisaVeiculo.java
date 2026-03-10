@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import grupoaravia.gynlog.controller.VeiculoController;
 import javax.swing.table.DefaultTableModel;
 import grupoaravia.gynlog.model.Veiculo;
 import grupoaravia.gynlog.util.ThemeAdm;
@@ -387,7 +388,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     private void pesquisarPorId(String idTexto) {
         try {
             int id = Integer.parseInt(idTexto);
-            ArrayList<Veiculo> todosVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+            ArrayList<Veiculo> todosVeiculos = new VeiculoController().listarTodos();
             ArrayList<Veiculo> resultados = new ArrayList<>();
             
             for (Veiculo v : todosVeiculos) {
@@ -447,7 +448,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     }
     
     private void pesquisarPorPlaca(String placa) {
-        ArrayList<Veiculo> todosVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<Veiculo> todosVeiculos = new VeiculoController().listarTodos();
         ArrayList<Veiculo> resultados = new ArrayList<>();
         
         for (Veiculo v : todosVeiculos) {
@@ -496,7 +497,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     }
     
     private void pesquisarPorModelo(String modelo) {
-        ArrayList<Veiculo> todosVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<Veiculo> todosVeiculos = new VeiculoController().listarTodos();
         ArrayList<Veiculo> resultados = new ArrayList<>();
         
         for (Veiculo v : todosVeiculos) {
@@ -560,7 +561,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     }
     
     private void pesquisarPorMarca(String marca) {
-        ArrayList<Veiculo> todosVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<Veiculo> todosVeiculos = new VeiculoController().listarTodos();
         ArrayList<Veiculo> resultados = new ArrayList<>();
         
         for (Veiculo v : todosVeiculos) {
@@ -623,7 +624,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     private void pesquisarPorAno(String anoTexto) {
         try {
             int ano = Integer.parseInt(anoTexto);
-            ArrayList<Veiculo> todosVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+            ArrayList<Veiculo> todosVeiculos = new VeiculoController().listarTodos();
             ArrayList<Veiculo> resultados = new ArrayList<>();
             
             for (Veiculo v : todosVeiculos) {
@@ -641,7 +642,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JFrame {
     
     // Filtro: Disponibilidade ---------------------------
     private void pesquisarDisponiveis(boolean disponivel) {
-        ArrayList<Veiculo> todosVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<Veiculo> todosVeiculos = new VeiculoController().listarTodos();
         ArrayList<Veiculo> resultados = new ArrayList<>();
         
         for (Veiculo v : todosVeiculos) {
