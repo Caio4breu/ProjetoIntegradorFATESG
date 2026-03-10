@@ -1,4 +1,4 @@
-package util;
+package grupoaravia.gynlog.util;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,7 +25,7 @@ public class ArquivoExcel_Despesa {
             header.createCell(0).setCellValue("ID da Movimentação");
             header.createCell(1).setCellValue("Descrição");
             
-            ArrayList<Movimento> movimentos = util.ArquivoTXT_Movimento.lerArquivo();
+            ArrayList<Movimento> movimentos = grupoaravia.gynlog.util.ArquivoTXT_Movimento.lerArquivo();
             Map<Integer, String> tiposDespesa = new LinkedHashMap<>();
             
             // Extrai ID Tipo Despesa e Descrição de cada movimento

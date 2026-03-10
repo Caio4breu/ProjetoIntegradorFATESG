@@ -1,6 +1,6 @@
 package view;
 
-import util.ThemeAdm;
+import grupoaravia.gynlog.util.ThemeAdm;
 
 public class TelaInicio extends javax.swing.JFrame {
     

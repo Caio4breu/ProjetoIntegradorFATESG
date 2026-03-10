@@ -1,4 +1,4 @@
-package util;
+package grupoaravia.gynlog.util;
 
 /**
  * @author Gabriel
@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.Veiculo; 
-import util.ArquivoTXT_Movimento;
-import util.ArquivoTXT_Veiculo; 
-import util.GerarRelatorios;
+import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
+import grupoaravia.gynlog.util.ArquivoTXT_Veiculo;
+import grupoaravia.gynlog.util.GerarRelatorios;
 
 public class relatorioDespesaTotalFrota extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//
     

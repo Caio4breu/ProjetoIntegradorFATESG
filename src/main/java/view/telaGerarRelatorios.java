@@ -1,13 +1,13 @@
 package view;
 
 import javax.swing.JOptionPane;
-import util.ThemeAdm;
-import util.relatorioDespesaTotalFrota;
-import util.relatorioDespesasVeiculo;
-import util.relatorioGastoMensalCombustivelTotalFrota;
-import util.relatorioIPVATotalAnualFrota;
-import util.relatorioTotalMultasVeiculo;
-import util.relatorioVeiculosInativos;
+import grupoaravia.gynlog.util.ThemeAdm;
+import grupoaravia.gynlog.util.relatorioDespesaTotalFrota;
+import grupoaravia.gynlog.util.relatorioDespesasVeiculo;
+import grupoaravia.gynlog.util.relatorioGastoMensalCombustivelTotalFrota;
+import grupoaravia.gynlog.util.relatorioIPVATotalAnualFrota;
+import grupoaravia.gynlog.util.relatorioTotalMultasVeiculo;
+import grupoaravia.gynlog.util.relatorioVeiculosInativos;
 
 /**
  * @author Gabriel
@@ -312,7 +312,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
             return;
         }
 
-        new util.relatorioDespesasVeiculo().gerarRelatorio(
+        new grupoaravia.gynlog.util.relatorioDespesasVeiculo().gerarRelatorio(
                 "Movimentações Gerais do Veículo ID " + filtro,
                 new String[]{"Data", "Descrição", "Tipo Despesa", "Valor (R$)"},
                 filtro
@@ -360,7 +360,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
             return;
         }
 
-        new util.relatorioDespesaTotalFrota().gerarRelatorio(
+        new grupoaravia.gynlog.util.relatorioDespesaTotalFrota().gerarRelatorio(
                 "Despesa Mensal da Frota (" + filtro + ")",
                 new String[]{"ID Veículo", "Placa", "Total Custo (R$)"},
                 filtro
@@ -412,7 +412,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
         }
 
         // Chamada do Relatório com 'util.'
-        new util.relatorioGastoMensalCombustivelTotalFrota().gerarRelatorio(
+        new grupoaravia.gynlog.util.relatorioGastoMensalCombustivelTotalFrota().gerarRelatorio(
                 "Custo Mensal de Combustível da Frota (" + filtro + ")",
                 new String[]{"ID Veículo", "Data", "Custo (R$)"},
                 filtro
@@ -444,7 +444,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
         String idVeiculoStr = partesFiltro[0].trim();
         String anoFiltro = partesFiltro[1].trim();
 
-        new util.relatorioTotalMultasVeiculo().gerarRelatorio(
+        new grupoaravia.gynlog.util.relatorioTotalMultasVeiculo().gerarRelatorio(
                 "Multas Anuais do Veículo " + idVeiculoStr + " (" + anoFiltro + ")",
                 new String[]{"Data", "Valor (R$)", "Descrição"},
                 filtro
@@ -483,7 +483,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
             return;
         }
 
-        new util.relatorioIPVATotalAnualFrota().gerarRelatorio(
+        new grupoaravia.gynlog.util.relatorioIPVATotalAnualFrota().gerarRelatorio(
                 "IPVA Detalhado da Frota no Ano (" + filtro + ")",
                 new String[]{"ID Veículo", "Valor (R$)"},
                 filtro

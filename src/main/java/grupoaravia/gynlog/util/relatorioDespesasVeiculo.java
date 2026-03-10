@@ -1,4 +1,4 @@
-package util;
+package grupoaravia.gynlog.util;
 
 /**
  *
@@ -8,9 +8,9 @@ package util;
 import java.util.ArrayList;
 import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.TipoDespesa;
-import util.ArquivoTXT_Movimento; 
-import util.ArquivoTXT_Despesa; 
-import util.GerarRelatorios; 
+import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
+import grupoaravia.gynlog.util.ArquivoTXT_Despesa;
+import grupoaravia.gynlog.util.GerarRelatorios; 
 
 
 public class relatorioDespesasVeiculo extends GerarRelatorios { 

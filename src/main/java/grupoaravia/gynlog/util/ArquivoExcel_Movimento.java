@@ -1,4 +1,4 @@
-package util;
+package grupoaravia.gynlog.util;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
-import util.ThemeAdm;
+import grupoaravia.gynlog.util.ThemeAdm;
 
 public class TelaSlash extends javax.swing.JFrame {
     

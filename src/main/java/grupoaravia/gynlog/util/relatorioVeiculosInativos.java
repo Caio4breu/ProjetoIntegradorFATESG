@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package util;
+package grupoaravia.gynlog.util;
 
 /**
  *
@@ -11,8 +11,8 @@ package util;
 
 import java.util.ArrayList;
 import grupoaravia.gynlog.model.Veiculo;
-import util.ArquivoTXT_Veiculo; 
-import util.GerarRelatorios;
+import grupoaravia.gynlog.util.ArquivoTXT_Veiculo;
+import grupoaravia.gynlog.util.GerarRelatorios;
 
 
 public class relatorioVeiculosInativos extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//

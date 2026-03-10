@@ -1,4 +1,4 @@
-package util;
+package grupoaravia.gynlog.util;
 
 /**
  * @author Gabriel
