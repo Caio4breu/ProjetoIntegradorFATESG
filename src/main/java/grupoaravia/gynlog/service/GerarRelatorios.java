@@ -54,7 +54,7 @@ public abstract class GerarRelatorios { //Classe mãe que modela os relatórios 
     }
 
     private void gerarTxt(String titulo, String[] colunas, ArrayList<String[]> dados) { //cria o arquivo TXT//
-        String nomeArquivo = "Relatorio_" + titulo.replace(" ", "_").replace("/", "-") + ".txt"; 
+        String nomeArquivo = "data/Relatorio_" + titulo.replace(" ", "_").replace("/", "-") + ".txt"; 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) { 
             writer.write("=== SISTEMA GYNLOG - " + titulo.toUpperCase() + " ==="); 
             writer.newLine();
@@ -86,7 +86,7 @@ public abstract class GerarRelatorios { //Classe mãe que modela os relatórios 
     }
 
     private void gerarExcel(String titulo, String[] colunas, ArrayList<String[]> dados) { //cria o arquivo do Excel, pela biblioteca Apache POI//
-        String nomeArquivo = "Relatorio_" + titulo.replace(" ", "_").replace("/", "-") + ".xlsx"; 
+        String nomeArquivo = "data/Relatorio_" + titulo.replace(" ", "_").replace("/", "-") + ".xlsx"; 
         try (Workbook wb = new XSSFWorkbook()) { 
             Sheet sheet = wb.createSheet("Dados"); //cria a planilha
             
