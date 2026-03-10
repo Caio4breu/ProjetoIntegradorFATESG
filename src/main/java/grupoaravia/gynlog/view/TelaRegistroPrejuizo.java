@@ -109,7 +109,7 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
                 
                 try {
                     int idVeiculo = Integer.parseInt(raw);
-                    java.util.ArrayList<Veiculo> listaVeiculos = grupoaravia.gynlog.util.ArquivoTXT_Veiculo.LerArquivo();
+                    java.util.ArrayList<Veiculo> listaVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
                     boolean encontrado = false;
                     
                     for (Veiculo v : listaVeiculos) {
@@ -181,7 +181,7 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
     
     // Gera o próximo ID de movimentação
     private int gerarProximoIdMovimento() {
-        java.util.ArrayList<Movimento> lista = grupoaravia.gynlog.util.ArquivoTXT_Movimento.lerArquivo();
+        java.util.ArrayList<Movimento> lista = grupoaravia.gynlog.repository.ArquivoTXT_Movimento.lerArquivo();
         
         // Se a lista está vazia, começa com 10000
         if (lista.isEmpty()) {
@@ -369,15 +369,15 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
             
                         
             // TXTs
-            grupoaravia.gynlog.util.ArquivoTXT_Movimento.salvarLinha(novoMovimento);
-            grupoaravia.gynlog.util.ArquivoTXT_Despesa.sincronizarComMovimento();
+            grupoaravia.gynlog.repository.ArquivoTXT_Movimento.salvarLinha(novoMovimento);
+            grupoaravia.gynlog.repository.ArquivoTXT_Despesa.sincronizarComMovimento();
             
             // XLSXs
-            java.util.ArrayList<Movimento> listaMovimentos = grupoaravia.gynlog.util.ArquivoTXT_Movimento.lerArquivo();
-            grupoaravia.gynlog.util.ArquivoExcel_Movimento.Transf_Excel(listaMovimentos, "Movimento.xlsx");
+            java.util.ArrayList<Movimento> listaMovimentos = grupoaravia.gynlog.repository.ArquivoTXT_Movimento.lerArquivo();
+            grupoaravia.gynlog.repository.ArquivoExcel_Movimento.Transf_Excel(listaMovimentos, "Movimento.xlsx");
             
             // Sync
-            grupoaravia.gynlog.util.ArquivoExcel_Despesa.Transf_Excel(null, "Despesas.xlsx");
+            grupoaravia.gynlog.repository.ArquivoExcel_Despesa.Transf_Excel(null, "Despesas.xlsx");
             
             JOptionPane.showMessageDialog(this,
                     "Movimentação registrada com sucesso!\n" +

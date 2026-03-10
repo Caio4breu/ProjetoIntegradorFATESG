@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.Veiculo; 
-import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
-import grupoaravia.gynlog.util.ArquivoTXT_Veiculo;
+import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
+import grupoaravia.gynlog.repository.ArquivoTXT_Veiculo;
 import grupoaravia.gynlog.service.GerarRelatorios;
-import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
-import grupoaravia.gynlog.util.ArquivoTXT_Veiculo;
+import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
+import grupoaravia.gynlog.repository.ArquivoTXT_Veiculo;
 
 public class relatorioDespesaTotalFrota extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//
     

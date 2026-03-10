@@ -11,9 +11,9 @@ package grupoaravia.gynlog.service;
 
 import java.util.ArrayList;
 import grupoaravia.gynlog.model.Veiculo;
-import grupoaravia.gynlog.util.ArquivoTXT_Veiculo;
+import grupoaravia.gynlog.repository.ArquivoTXT_Veiculo;
 import grupoaravia.gynlog.service.GerarRelatorios;
-import grupoaravia.gynlog.util.ArquivoTXT_Veiculo;
+import grupoaravia.gynlog.repository.ArquivoTXT_Veiculo;
 
 
 public class relatorioVeiculosInativos extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//

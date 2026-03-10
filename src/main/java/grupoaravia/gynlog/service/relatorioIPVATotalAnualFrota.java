@@ -6,9 +6,9 @@ package grupoaravia.gynlog.service;
 
 import java.util.ArrayList;
 import grupoaravia.gynlog.model.Movimento;
-import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
+import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
 import grupoaravia.gynlog.service.GerarRelatorios;
-import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
+import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
 
 public class relatorioIPVATotalAnualFrota extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//
     

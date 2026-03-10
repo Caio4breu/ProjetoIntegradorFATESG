@@ -1,4 +1,4 @@
-package grupoaravia.gynlog.util;
+package grupoaravia.gynlog.repository;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

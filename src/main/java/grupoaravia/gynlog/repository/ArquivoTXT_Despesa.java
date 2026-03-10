@@ -1,4 +1,4 @@
-package grupoaravia.gynlog.util;
+package grupoaravia.gynlog.repository;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,7 +22,7 @@ public class ArquivoTXT_Despesa {
     public static void sincronizarComMovimento() {
         try {
             // Lê todos os movimentos
-            ArrayList<Movimento> movimentos = grupoaravia.gynlog.util.ArquivoTXT_Movimento.lerArquivo();
+            ArrayList<Movimento> movimentos = grupoaravia.gynlog.repository.ArquivoTXT_Movimento.lerArquivo();
             
             // Usa LinkedHashMap para manter ordem e evitar duplicatas
             Map<Integer, String> tiposDespesa = new LinkedHashMap<>();

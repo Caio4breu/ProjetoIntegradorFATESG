@@ -234,7 +234,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         }
 
         try {
-            ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = grupoaravia.gynlog.util.ArquivoTXT_Veiculo.LerArquivo();
+            ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
 
             int alterados = 0;
             for (String id : idsParaAlterar) {
@@ -257,8 +257,8 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
                 return;
             }
 
-            grupoaravia.gynlog.util.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
-            grupoaravia.gynlog.util.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
+            grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
+            grupoaravia.gynlog.repository.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
 
             String mensagemSucesso;
             if (alterados == 1) {
@@ -379,7 +379,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         }
 
         // Leitura de todos os veículos
-        ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = grupoaravia.gynlog.util.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
 
         // Remove os veículos com os IDs correspondentes
         int removidos = 0;
@@ -397,8 +397,8 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
             return;
         }
 
-        grupoaravia.gynlog.util.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
-        grupoaravia.gynlog.util.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
+        grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
+        grupoaravia.gynlog.repository.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
 
         String mensagemSucesso;
         if (removidos == 1) {
