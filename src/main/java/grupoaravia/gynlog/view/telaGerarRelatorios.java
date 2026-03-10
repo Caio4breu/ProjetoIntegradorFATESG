@@ -3,11 +3,17 @@ package grupoaravia.gynlog.view;
 import javax.swing.JOptionPane;
 import grupoaravia.gynlog.util.ThemeAdm;
 import grupoaravia.gynlog.controller.RelatorioController;
-import grupoaravia.gynlog.service.relatorioVeiculosInativos;
 
 /**
- * @author Gabriel
+ * Grupo Aravia
+ *
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
  */
+
 public class telaGerarRelatorios extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(telaGerarRelatorios.class.getName());

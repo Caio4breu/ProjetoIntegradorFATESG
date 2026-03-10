@@ -8,6 +8,16 @@ import grupoaravia.gynlog.controller.VeiculoController;
 import grupoaravia.gynlog.controller.MovimentoController;
 import grupoaravia.gynlog.model.Veiculo;
 
+/**
+ * Grupo Aravia
+ *
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
+ */
+
 public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 
     public TelaRegistroPrejuizo() {

@@ -11,6 +11,16 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import grupoaravia.gynlog.model.Movimento;
 
+/**
+ * Grupo Aravia
+ *
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
+ */
+
 public class ArquivoTXT_Movimento {
     private static final String arquivamento = "data/Movimento.txt";
     private static final String separador = " | ";

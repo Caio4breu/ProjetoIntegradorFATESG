@@ -1,19 +1,23 @@
 package grupoaravia.gynlog.service;
 
-/**
- * @author Gabriel
- */
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.Veiculo; 
-import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
-import grupoaravia.gynlog.repository.ArquivoTXT_Veiculo;
 import grupoaravia.gynlog.service.GerarRelatorios;
 import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
 import grupoaravia.gynlog.repository.ArquivoTXT_Veiculo;
+
+/**
+ * Grupo Aravia
+ *
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
+ */
 
 public class relatorioDespesaTotalFrota extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//
     

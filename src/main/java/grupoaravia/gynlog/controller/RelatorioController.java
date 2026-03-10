@@ -8,8 +8,13 @@ import grupoaravia.gynlog.service.relatorioTotalMultasVeiculo;
 import grupoaravia.gynlog.service.relatorioVeiculosInativos;
 
 /**
+ * Grupo Aravia
  *
- * @author Caio 4breu
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
  */
 
 public class RelatorioController {

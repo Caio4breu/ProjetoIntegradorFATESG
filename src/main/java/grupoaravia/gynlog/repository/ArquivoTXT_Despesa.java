@@ -6,13 +6,22 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.TipoDespesa;
+
+/**
+ * Grupo Aravia
+ *
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
+ */
 
 public class ArquivoTXT_Despesa {
     private static final String arquivamento = "data/Despesas.txt";

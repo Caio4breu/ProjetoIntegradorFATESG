@@ -8,9 +8,15 @@ import grupoaravia.gynlog.repository.ArquivoTXT_Movimento;
 import java.util.ArrayList;
 
 /**
+ * Grupo Aravia
  *
- * @author Caio 4breu
+ * @author <a href="https://github.com/Alexsanei">Alexsanei</a>
+ * @author <a href="https://github.com/Caio4breu">Caio4breu</a>
+ * @author <a href="https://github.com/Nomscodes">Nomscodes</a>
+ * @author <a href="https://github.com/GabrielNaokiUT">GabrielNaokiUT</a>
+ * @author <a href="https://github.com/wyllianmn">wyllianmn</a>
  */
+
 public class MovimentoController {
 
     public void registrar(int idVeiculo, int idTipoDespesa, double valor, String descricao, String data) {
