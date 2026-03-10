@@ -1,4 +1,4 @@
-package model;
+package grupoaravia.gynlog.model;
 
 public class Veiculo { //Classe que modela e armazena infos do objeto veículo//
 

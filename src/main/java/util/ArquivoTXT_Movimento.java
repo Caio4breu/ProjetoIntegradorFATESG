@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.Movimento;
+import grupoaravia.gynlog.model.Movimento;
 
 public class ArquivoTXT_Movimento {
     private static final String arquivamento = "Movimento.txt";

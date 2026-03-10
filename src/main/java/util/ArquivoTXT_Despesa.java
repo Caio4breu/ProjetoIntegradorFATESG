@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import model.Movimento;
-import model.TipoDespesa;
+import grupoaravia.gynlog.model.Movimento;
+import grupoaravia.gynlog.model.TipoDespesa;
 
 public class ArquivoTXT_Despesa {
     private static final String arquivamento = "Despesas.txt";

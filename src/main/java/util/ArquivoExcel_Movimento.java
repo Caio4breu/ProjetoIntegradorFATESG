@@ -2,7 +2,7 @@ package util;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import model.Movimento;
+import grupoaravia.gynlog.model.Movimento;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Row;

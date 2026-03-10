@@ -4,9 +4,9 @@ import java.awt.Color;
 import util.ThemeAdm;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JOptionPane;
-import model.Movimento;
-import model.TipoDespesa;
-import model.Veiculo;
+import grupoaravia.gynlog.model.Movimento;
+import grupoaravia.gynlog.model.TipoDespesa;
+import grupoaravia.gynlog.model.Veiculo;
 
 public class TelaRegistroPrejuizo extends javax.swing.JFrame {
 

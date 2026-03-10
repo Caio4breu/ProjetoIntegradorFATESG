@@ -5,7 +5,7 @@ package util;
  */
 
 import java.util.ArrayList;
-import model.Movimento;
+import grupoaravia.gynlog.model.Movimento;
 import util.ArquivoTXT_Movimento;
 import util.GerarRelatorios;
 

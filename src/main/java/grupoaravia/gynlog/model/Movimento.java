@@ -1,4 +1,4 @@
-package model;
+package grupoaravia.gynlog.model;
 
 public class Movimento extends TipoDespesa {
     private int idMovimento;

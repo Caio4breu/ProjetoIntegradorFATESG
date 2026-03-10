@@ -10,7 +10,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
-import model.Veiculo;
+import grupoaravia.gynlog.model.Veiculo;
 
 public class ArquivoTXT_Veiculo {
     private static final String arquivamento = "Veiculo.txt";

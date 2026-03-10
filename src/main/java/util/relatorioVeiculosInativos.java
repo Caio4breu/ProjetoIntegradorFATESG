@@ -10,7 +10,7 @@ package util;
  */
 
 import java.util.ArrayList;
-import model.Veiculo;
+import grupoaravia.gynlog.model.Veiculo;
 import util.ArquivoTXT_Veiculo; 
 import util.GerarRelatorios;
 

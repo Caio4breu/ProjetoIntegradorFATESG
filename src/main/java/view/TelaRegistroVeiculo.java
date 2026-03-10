@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import model.Veiculo;
+import grupoaravia.gynlog.model.Veiculo;
 import util.ThemeAdm;
 
 public class TelaRegistroVeiculo extends javax.swing.JFrame {
@@ -627,8 +627,8 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 
                 try {
                     int id = Integer.parseInt(raw);
-                    java.util.ArrayList<model.Veiculo> Lista = util.ArquivoTXT_Veiculo.LerArquivo();
-                    for (model.Veiculo veiculo : Lista) {
+                    java.util.ArrayList<grupoaravia.gynlog.model.Veiculo> Lista = util.ArquivoTXT_Veiculo.LerArquivo();
+                    for (grupoaravia.gynlog.model.Veiculo veiculo : Lista) {
                         if (veiculo.getIdVeiculo() == id) {
                             JOptionPane.showMessageDialog(TelaRegistroVeiculo.this, 
                                     "Já existe um veículo com esse ID.", 

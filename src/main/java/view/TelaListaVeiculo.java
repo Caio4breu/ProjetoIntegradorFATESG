@@ -234,11 +234,11 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         }
 
         try {
-            ArrayList<model.Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
+            ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
 
             int alterados = 0;
             for (String id : idsParaAlterar) {
-                for (model.Veiculo veiculo : listaVeiculos) {
+                for (grupoaravia.gynlog.model.Veiculo veiculo : listaVeiculos) {
                     if (String.valueOf(veiculo.getIdVeiculo()).equals(id)) {
                         veiculo.setAtivo(tornarDisponivel);
                         alterados++;
@@ -379,7 +379,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         }
 
         // Leitura de todos os veículos
-        ArrayList<model.Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = util.ArquivoTXT_Veiculo.LerArquivo();
 
         // Remove os veículos com os IDs correspondentes
         int removidos = 0;
