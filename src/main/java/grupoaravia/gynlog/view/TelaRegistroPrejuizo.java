@@ -2,10 +2,10 @@ package grupoaravia.gynlog.view;
 
 import java.awt.Color;
 import grupoaravia.gynlog.util.ThemeAdm;
-import com.toedter.calendar.JDateChooser;
 import javax.swing.JOptionPane;
 import grupoaravia.gynlog.model.Movimento;
-import grupoaravia.gynlog.model.TipoDespesa;
+import grupoaravia.gynlog.controller.VeiculoController;
+import grupoaravia.gynlog.controller.MovimentoController;
 import grupoaravia.gynlog.model.Veiculo;
 
 public class TelaRegistroPrejuizo extends javax.swing.JFrame {
@@ -109,7 +109,7 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
                 
                 try {
                     int idVeiculo = Integer.parseInt(raw);
-                    java.util.ArrayList<Veiculo> listaVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+                    java.util.ArrayList<Veiculo> listaVeiculos = new VeiculoController().listarTodos();
                     boolean encontrado = false;
                     
                     for (Veiculo v : listaVeiculos) {
@@ -181,7 +181,7 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
     
     // Gera o próximo ID de movimentação
     private int gerarProximoIdMovimento() {
-        java.util.ArrayList<Movimento> lista = grupoaravia.gynlog.repository.ArquivoTXT_Movimento.lerArquivo();
+        java.util.ArrayList<Movimento> lista = new MovimentoController().listarTodos();
         
         // Se a lista está vazia, começa com 10000
         if (lista.isEmpty()) {
@@ -358,26 +358,7 @@ public class TelaRegistroPrejuizo extends javax.swing.JFrame {
             int idMovimento = Integer.parseInt(idMovimentoText);
             double valor = Double.parseDouble(valorText.replace(",", "."));
             
-            Movimento novoMovimento = new Movimento(
-                idMovimento,
-                idVeiculo,
-                idTipoDespesa,
-                valor,
-                descricaoText,
-                dataText
-            );
-            
-                        
-            // TXTs
-            grupoaravia.gynlog.repository.ArquivoTXT_Movimento.salvarLinha(novoMovimento);
-            grupoaravia.gynlog.repository.ArquivoTXT_Despesa.sincronizarComMovimento();
-            
-            // XLSXs
-            java.util.ArrayList<Movimento> listaMovimentos = grupoaravia.gynlog.repository.ArquivoTXT_Movimento.lerArquivo();
-            grupoaravia.gynlog.repository.ArquivoExcel_Movimento.Transf_Excel(listaMovimentos, "Movimento.xlsx");
-            
-            // Sync
-            grupoaravia.gynlog.repository.ArquivoExcel_Despesa.Transf_Excel(null, "Despesas.xlsx");
+            new MovimentoController().registrar(idVeiculo, idTipoDespesa, valor, descricaoText, dataText);
             
             JOptionPane.showMessageDialog(this,
                     "Movimentação registrada com sucesso!\n" +
