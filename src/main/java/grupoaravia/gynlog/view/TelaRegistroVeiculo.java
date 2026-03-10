@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import grupoaravia.gynlog.model.Veiculo;
+import grupoaravia.gynlog.controller.VeiculoController;
 import grupoaravia.gynlog.util.ThemeAdm;
 
 public class TelaRegistroVeiculo extends javax.swing.JFrame {
@@ -627,7 +628,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 
                 try {
                     int id = Integer.parseInt(raw);
-                    java.util.ArrayList<grupoaravia.gynlog.model.Veiculo> Lista = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+                    java.util.ArrayList<grupoaravia.gynlog.model.Veiculo> Lista = new VeiculoController().listarTodos();
                     for (grupoaravia.gynlog.model.Veiculo veiculo : Lista) {
                         if (veiculo.getIdVeiculo() == id) {
                             JOptionPane.showMessageDialog(TelaRegistroVeiculo.this, 
@@ -665,7 +666,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                     return;
                 }
                 
-                if(grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.placaJaExiste(placa)) {
+                if(new VeiculoController().placaJaExiste(placa)) {
                     JOptionPane.showMessageDialog(TelaRegistroVeiculo.this,
                             "Já existe um veículo com a placa: " + placa + "\n" +
                             "Por favor, verifique se não é um registro duplicado.",
@@ -678,7 +679,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 
                 jTFPlaca.setText(placa);
                 
-                int proximoId = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.gerarProximoId();
+                int proximoId = new VeiculoController().gerarProximoId();
                 jTFVeiculoID.setText(String.valueOf(proximoId));
                 jTFVeiculoID.setForeground(Color.BLACK);
             }
@@ -1172,7 +1173,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 return;
             }
             
-            if (grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.placaJaExiste(placaText)) {
+            if (new VeiculoController().placaJaExiste(placaText)) {
                 JOptionPane.showMessageDialog(this,
                         "Já existe um veículo com a placa: " + placaText,
                         "Placa Duplicada",
@@ -1229,14 +1230,7 @@ public class TelaRegistroVeiculo extends javax.swing.JFrame {
                 status = false;
             }
             
-            Veiculo novoVeiculo = new Veiculo(idVeiculo, placa, marca, modelo, anoFabricacao, status);
-            
-            // Salvando no arquivo Txt -----------------------------------------
-            grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.salvarLinha(novoVeiculo);
-            
-            // Atualizando Lista e transferindo para o arquivo xlsx ------------
-            java.util.ArrayList<Veiculo> listaAtualizada = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
-            grupoaravia.gynlog.repository.ArquivoExcel_Veiculo.Transf_Excel(listaAtualizada, "Veiculo.xlsx");
+            new VeiculoController().cadastrar(placa, marca, modelo, anoFabricacao, status);
             
             // Mensagem de sucesso com o ID gerado
             JOptionPane.showMessageDialog(this,
