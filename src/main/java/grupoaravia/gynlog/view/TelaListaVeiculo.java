@@ -1,14 +1,12 @@
 package grupoaravia.gynlog.view;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import grupoaravia.gynlog.controller.VeiculoController;
 import grupoaravia.gynlog.util.ThemeAdm;
 
 public class TelaListaVeiculo extends javax.swing.JFrame {
@@ -42,7 +40,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
     
     // Recebe dados do arquivo Veiculo.txt -------------------------------------
     private void carregarDadosNaTabela() {
-        String caminho = "Veiculo.txt";
+        String caminho = "data/Veiculo.txt";
         
         DefaultTableModel model = (DefaultTableModel) jTDados.getModel();
         model.setRowCount(0);
@@ -234,7 +232,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         }
 
         try {
-            ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+            ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = new VeiculoController().listarTodos();
 
             int alterados = 0;
             for (String id : idsParaAlterar) {
@@ -257,8 +255,8 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
                 return;
             }
 
-            grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
-            grupoaravia.gynlog.repository.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
+            VeiculoController controller = new VeiculoController();
+            controller.atualizarLista(listaVeiculos);
 
             String mensagemSucesso;
             if (alterados == 1) {
@@ -379,7 +377,7 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
         }
 
         // Leitura de todos os veículos
-        ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.LerArquivo();
+        ArrayList<grupoaravia.gynlog.model.Veiculo> listaVeiculos = new VeiculoController().listarTodos();
 
         // Remove os veículos com os IDs correspondentes
         int removidos = 0;
@@ -397,8 +395,8 @@ public class TelaListaVeiculo extends javax.swing.JFrame {
             return;
         }
 
-        grupoaravia.gynlog.repository.ArquivoTXT_Veiculo.AtualizarTxtExcel(listaVeiculos);
-        grupoaravia.gynlog.repository.ArquivoExcel_Veiculo.Transf_Excel(listaVeiculos, "Veiculo.xlsx");
+        VeiculoController controller = new VeiculoController();
+        controller.atualizarLista(listaVeiculos);
 
         String mensagemSucesso;
         if (removidos == 1) {
