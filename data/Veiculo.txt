@@ -1,0 +1,127 @@
+ID do Veículo | Placa | Marca | Modelo | Ano | Disponibilidade
+100000 | ABC1234 | Volkswagen | Amarok | 2000 | Disponível
+100001 | EUN6Y96 | Ram | Ram 1500 | 2024 | Indisponível
+100002 | UOA4N82 | Iveco | Daily 45-170 | 2013 | Indisponível
+100003 | VRH1Y95 | Chevrolet | S10 | 2021 | Indisponível
+100004 | APX7804 | Toyota | HiAce | 2023 | Indisponível
+100005 | MRU4O39 | Ford | F-250 | 2009 | Disponível
+100006 | CTC7734 | Iveco | S-Way 570 | 2011 | Disponível
+100007 | BLJ2585 | Volkswagen | Delivery 4.150 | 2017 | Disponível
+100008 | XUH1321 | Volkswagen | Delivery 4.150 | 2006 | Disponível
+100009 | OVE3R25 | Nissan | Frontier | 2014 | Indisponível
+100010 | BVC2O36 | Ram | ProMaster Van | 2020 | Disponível
+100011 | NWE0F22 | Fiat | Toro | 2011 | Indisponível
+100012 | QGN4R21 | Toyota | HiAce | 2012 | Indisponível
+100013 | MCP3993 | MAN | TGS 26.440 | 2008 | Indisponível
+100014 | GUV5V36 | Fiat | Ducato Cargo Maxi | 2007 | Indisponível
+100015 | KCU8832 | Renault | Trafic | 2023 | Disponível
+100016 | HGP2G48 | MAN | TGL 12.250 | 2007 | Disponível
+100017 | KHX2964 | MAN | TGM 26.290 | 2014 | Indisponível
+100018 | CDD7L35 | Ram | ProMaster Van | 2022 | Disponível
+100019 | USP4490 | Ford | F-350 | 2011 | Indisponível
+100020 | BQJ5H29 | Mitsubishi | L200 Savana | 2005 | Disponível
+100021 | VNU2150 | Nissan | Frontier XE | 2011 | Disponível
+100022 | JFI3C93 | Chevrolet | S10 | 2012 | Disponível
+100023 | YGZ6412 | Hyundai | HD 80 | 2011 | Indisponível
+100024 | GLJ5R67 | Iveco | S-Way 570 | 2015 | Disponível
+100025 | JID0343 | Volvo | FH 540 | 2024 | Disponível
+100026 | TIP9996 | Mitsubishi | Fuso Canter 6.5 | 2014 | Disponível
+100027 | HXE9468 | Toyota | Hilux | 2009 | Disponível
+100028 | IJY5110 | Ford | F-4000 | 2011 | Disponível
+100029 | GYR3324 | Renault | Master Furgão | 2007 | Disponível
+100030 | MRX5827 | Toyota | Hilux | 2022 | Disponível
+100031 | ZCO1I93 | Volvo | FH 460 | 2017 | Disponível
+100032 | YVN0M00 | Volvo | FH 500 | 2018 | Disponível
+100033 | AVH7S86 | Ford | F-350 | 2010 | Indisponível
+100034 | IAO7D39 | Fiat | Toro | 2009 | Disponível
+100035 | LHY5411 | Iveco | Daily 35-150 | 2023 | Disponível
+100036 | MIZ5D83 | Renault | Alaskan | 2008 | Disponível
+100037 | RWW5236 | Iveco | Tector 24-300 | 2018 | Disponível
+100038 | QMK6R15 | Mitsubishi | L200 Savana | 2017 | Disponível
+100039 | NID2777 | Volkswagen | Crafter 2.0 | 2022 | Disponível
+100040 | OHI7586 | Iveco | Hi-Way 480 | 2024 | Disponível
+100041 | MUQ0I49 | Toyota | Hilux CD SRX | 2015 | Disponível
+100042 | KSB5327 | Mitsubishi | Fuso Canter 6.5 | 2008 | Indisponível
+100043 | YRE1907 | Ram | Ram 3500 | 2016 | Indisponível
+100044 | YRS4N86 | Fiat | Ducato Furgão | 2012 | Disponível
+100045 | JBM8V44 | Hyundai | Solati | 2018 | Disponível
+100046 | AZS0612 | Chevrolet | S10 | 2006 | Disponível
+100047 | GCR6302 | Volkswagen | Amarok | 2006 | Disponível
+100048 | NCG1D24 | MAN | TGM 26.290 | 2017 | Indisponível
+100049 | QJK9H30 | Scania | P 360 | 2008 | Indisponível
+100050 | BQT5H32 | Scania | P 280 | 2011 | Disponível
+100051 | OCF8025 | Chevrolet | Silverado 2500 HD | 2012 | Disponível
+100052 | WVC4A26 | Fiat | Ducato Minibus | 2012 | Indisponível
+100053 | OQR6O47 | Volvo | FMX 540 | 2011 | Disponível
+100054 | ZOB2O43 | Volvo | FMX 540 | 2010 | Indisponível
+100055 | GXZ5403 | Nissan | Frontier XE | 2011 | Disponível
+100056 | MHS3N91 | MAN | TGL 12.250 | 2015 | Indisponível
+100057 | XKK7915 | Fiat | Ducato Furgão | 2009 | Disponível
+100058 | KIK3B13 | Hyundai | HD 160 | 2013 | Disponível
+100059 | QAY7Z75 | Ford | Transit Van | 2023 | Disponível
+100060 | RPU1551 | Mitsubishi | L200 Triton | 2014 | Indisponível
+100061 | ZMJ8D95 | Scania | R 500 | 2020 | Indisponível
+100062 | GDF5R93 | Scania | P 280 | 2007 | Disponível
+100063 | ESC4341 | MAN | TGM 26.290 | 2009 | Disponível
+100064 | UWI9405 | Toyota | Coaster | 2013 | Disponível
+100065 | WMT1Q23 | Hyundai | HD 160 | 2010 | Disponível
+100066 | FCH9826 | Volvo | FM 420 | 2009 | Disponível
+100067 | JYU0X99 | MAN | TGL 12.250 | 2023 | Disponível
+100068 | DRS7I36 | Nissan | NV350 Urvan | 2007 | Disponível
+100069 | EAV9P72 | MAN | TGL 12.250 | 2011 | Disponível
+100070 | VND3172 | Volvo | FH 500 | 2019 | Indisponível
+100071 | NMT0P81 | Fiat | Toro | 2015 | Disponível
+100072 | MFH9707 | Iveco | Tector 24-300 | 2012 | Disponível
+100073 | CQM2156 | Mitsubishi | Fuso Canter 6.5 | 2024 | Disponível
+100074 | ZYV4C24 | Nissan | Frontier | 2021 | Disponível
+100075 | AAT5798 | Chevrolet | S10 High Country | 2013 | Disponível
+100076 | VWN6I38 | Renault | Trafic | 2007 | Disponível
+100077 | DOD1U68 | Volkswagen | Transporter T6 | 2020 | Disponível
+100078 | LDC4M71 | Ford | Transit Van | 2019 | Disponível
+100079 | XVY1W76 | Chevrolet | S10 High Country | 2022 | Indisponível
+100080 | VYC5796 | MAN | TGL 12.250 | 2013 | Disponível
+100081 | HNO3I09 | Renault | Master Furgão | 2021 | Indisponível
+100082 | GBQ0012 | Volkswagen | Amarok | 2024 | Disponível
+100083 | WTC1879 | Volkswagen | Constellation 24.280 | 2024 | Disponível
+100084 | SNJ2K67 | Iveco | S-Way 570 | 2012 | Indisponível
+100085 | STR1036 | Volkswagen | Delivery 4.150 | 2022 | Disponível
+100086 | FXG3O06 | Volkswagen | Transporter T6 | 2022 | Indisponível
+100087 | GHR1954 | Toyota | Hilux | 2009 | Disponível
+100088 | YGG0D35 | Volkswagen | Crafter 2.0 | 2017 | Disponível
+100089 | KVK0C70 | Scania | P 360 | 2010 | Disponível
+100090 | CHL0F80 | Mercedes-Benz | Sprinter 415 CDI | 2014 | Indisponível
+100091 | IIU6K88 | Toyota | Hilux | 2012 | Indisponível
+100092 | EBU7J51 | Scania | R 500 | 2013 | Disponível
+100093 | KVY3Y83 | Renault | Trafic | 2017 | Indisponível
+100094 | QZQ4I46 | Toyota | HiAce | 2019 | Disponível
+100095 | OUJ0Y56 | Mitsubishi | L200 Triton | 2024 | Disponível
+100096 | TAN6352 | Chevrolet | Express 2500 | 2024 | Indisponível
+100097 | ARZ9N43 | Ford | F-350 | 2005 | Disponível
+100098 | CGD0N63 | Ram | Ram 2500 | 2011 | Disponível
+100099 | CWQ0E66 | Ford | Cargo 1519 | 2008 | Disponível
+100100 | UZH6Y02 | MAN | TGS 26.440 | 2011 | Disponível
+100101 | GHH4260 | Scania | S 500 | 2014 | Indisponível
+100102 | CLI8303 | Nissan | NV350 Urvan | 2007 | Disponível
+100103 | XAB8759 | Iveco | S-Way 570 | 2012 | Disponível
+100104 | MRY4993 | Toyota | Coaster | 2018 | Disponível
+100105 | TKA7395 | Toyota | Hilux CD SRX | 2023 | Disponível
+100106 | QMK2F11 | Toyota | HiAce | 2018 | Disponível
+100107 | GZJ2J07 | Renault | Master Furgão | 2016 | Disponível
+100108 | UBT4F63 | Iveco | Hi-Way 480 | 2017 | Disponível
+100109 | RJS3A09 | Hyundai | Solati | 2015 | Disponível
+100110 | SGY4M21 | Mitsubishi | L200 Savana | 2013 | Indisponível
+100111 | FSV3F24 | Iveco | Tector 11-190 | 2023 | Disponível
+100112 | FTT3K75 | Renault | Master Furgão | 2013 | Indisponível
+100113 | GTK5769 | Chevrolet | S10 | 2021 | Disponível
+100114 | BGA3860 | Ford | Cargo 1519 | 2018 | Indisponível
+100115 | DXI9503 | Fiat | Ducato Minibus | 2015 | Disponível
+100116 | HNH6154 | Volkswagen | Crafter 2.0 | 2009 | Disponível
+100117 | HAT6V07 | Scania | P 280 | 2007 | Disponível
+100118 | CFI1876 | Mercedes-Benz | Atego 1719 | 2021 | Indisponível
+100119 | EUB6K38 | Scania | S 500 | 2010 | Disponível
+100120 | JQH8298 | Mercedes-Benz | Accelo 815 | 2018 | Indisponível
+100121 | HRZ8C01 | Hyundai | HR 2.5 | 2013 | Indisponível
+100122 | YWZ8150 | Volkswagen | Crafter 2.0 | 2015 | Indisponível
+100123 | GRU9435 | MAN | TGX 28.440 | 2018 | Disponível
+100124 | MLF6020 | Scania | S 500 | 2015 | Disponível
+100125 | ABC4321 | Agrale | Agrale 10500 | 2000 | Indisponível
