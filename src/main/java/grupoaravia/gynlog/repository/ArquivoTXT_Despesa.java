@@ -15,7 +15,7 @@ import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.TipoDespesa;
 
 public class ArquivoTXT_Despesa {
-    private static final String arquivamento = "Despesas.txt";
+    private static final String arquivamento = "data/Despesas.txt";
     private static final String separador = " | ";
 
     // Metodo sincroniza com movimento.txt

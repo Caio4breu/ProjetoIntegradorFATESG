@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import grupoaravia.gynlog.model.Veiculo;
 
 public class ArquivoTXT_Veiculo {
-    private static final String arquivamento = "Veiculo.txt";
+    private static final String arquivamento = "data/Veiculo.txt";
     private static final String separador = " | ";
     
     public static void salvarLinha(Veiculo veiculo) {

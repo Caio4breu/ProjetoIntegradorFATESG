@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import grupoaravia.gynlog.model.Movimento;
 
 public class ArquivoTXT_Movimento {
-    private static final String arquivamento = "Movimento.txt";
+    private static final String arquivamento = "data/Movimento.txt";
     private static final String separador = " | ";
     
     public static void salvarLinha(Movimento movimento) {
