@@ -1,4 +1,4 @@
-package grupoaravia.gynlog.util;
+package grupoaravia.gynlog.service;
 
 /**
  * @author Gabriel
@@ -9,7 +9,9 @@ import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.model.TipoDespesa;
 import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
 import grupoaravia.gynlog.util.ArquivoTXT_Despesa;
-import grupoaravia.gynlog.util.GerarRelatorios;
+import grupoaravia.gynlog.service.GerarRelatorios;
+import grupoaravia.gynlog.util.ArquivoTXT_Despesa;
+import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
 
 public class relatorioTotalMultasVeiculo extends GerarRelatorios { 
   

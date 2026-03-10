@@ -1,4 +1,4 @@
-package grupoaravia.gynlog.util;
+package grupoaravia.gynlog.service;
 
 /**
  * @author Gabriel
@@ -7,7 +7,8 @@ package grupoaravia.gynlog.util;
 import java.util.ArrayList;
 import grupoaravia.gynlog.model.Movimento;
 import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
-import grupoaravia.gynlog.util.GerarRelatorios;
+import grupoaravia.gynlog.service.GerarRelatorios;
+import grupoaravia.gynlog.util.ArquivoTXT_Movimento;
 
 
 public class relatorioGastoMensalCombustivelTotalFrota extends GerarRelatorios { //classe filha que atraves do polimorfismo filtram os dados e formatam os dados//

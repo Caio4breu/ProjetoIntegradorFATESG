@@ -2,12 +2,12 @@ package grupoaravia.gynlog.view;
 
 import javax.swing.JOptionPane;
 import grupoaravia.gynlog.util.ThemeAdm;
-import grupoaravia.gynlog.util.relatorioDespesaTotalFrota;
-import grupoaravia.gynlog.util.relatorioDespesasVeiculo;
-import grupoaravia.gynlog.util.relatorioGastoMensalCombustivelTotalFrota;
-import grupoaravia.gynlog.util.relatorioIPVATotalAnualFrota;
-import grupoaravia.gynlog.util.relatorioTotalMultasVeiculo;
-import grupoaravia.gynlog.util.relatorioVeiculosInativos;
+import grupoaravia.gynlog.service.relatorioDespesaTotalFrota;
+import grupoaravia.gynlog.service.relatorioDespesasVeiculo;
+import grupoaravia.gynlog.service.relatorioGastoMensalCombustivelTotalFrota;
+import grupoaravia.gynlog.service.relatorioIPVATotalAnualFrota;
+import grupoaravia.gynlog.service.relatorioTotalMultasVeiculo;
+import grupoaravia.gynlog.service.relatorioVeiculosInativos;
 
 /**
  * @author Gabriel
@@ -312,7 +312,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
             return;
         }
 
-        new grupoaravia.gynlog.util.relatorioDespesasVeiculo().gerarRelatorio(
+        new grupoaravia.gynlog.service.relatorioDespesasVeiculo().gerarRelatorio(
                 "Movimentações Gerais do Veículo ID " + filtro,
                 new String[]{"Data", "Descrição", "Tipo Despesa", "Valor (R$)"},
                 filtro
@@ -360,7 +360,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
             return;
         }
 
-        new grupoaravia.gynlog.util.relatorioDespesaTotalFrota().gerarRelatorio(
+        new grupoaravia.gynlog.service.relatorioDespesaTotalFrota().gerarRelatorio(
                 "Despesa Mensal da Frota (" + filtro + ")",
                 new String[]{"ID Veículo", "Placa", "Total Custo (R$)"},
                 filtro
@@ -412,7 +412,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
         }
 
         // Chamada do Relatório com 'util.'
-        new grupoaravia.gynlog.util.relatorioGastoMensalCombustivelTotalFrota().gerarRelatorio(
+        new grupoaravia.gynlog.service.relatorioGastoMensalCombustivelTotalFrota().gerarRelatorio(
                 "Custo Mensal de Combustível da Frota (" + filtro + ")",
                 new String[]{"ID Veículo", "Data", "Custo (R$)"},
                 filtro
@@ -444,7 +444,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
         String idVeiculoStr = partesFiltro[0].trim();
         String anoFiltro = partesFiltro[1].trim();
 
-        new grupoaravia.gynlog.util.relatorioTotalMultasVeiculo().gerarRelatorio(
+        new grupoaravia.gynlog.service.relatorioTotalMultasVeiculo().gerarRelatorio(
                 "Multas Anuais do Veículo " + idVeiculoStr + " (" + anoFiltro + ")",
                 new String[]{"Data", "Valor (R$)", "Descrição"},
                 filtro
@@ -483,7 +483,7 @@ public class telaGerarRelatorios extends javax.swing.JFrame {
             return;
         }
 
-        new grupoaravia.gynlog.util.relatorioIPVATotalAnualFrota().gerarRelatorio(
+        new grupoaravia.gynlog.service.relatorioIPVATotalAnualFrota().gerarRelatorio(
                 "IPVA Detalhado da Frota no Ano (" + filtro + ")",
                 new String[]{"ID Veículo", "Valor (R$)"},
                 filtro
