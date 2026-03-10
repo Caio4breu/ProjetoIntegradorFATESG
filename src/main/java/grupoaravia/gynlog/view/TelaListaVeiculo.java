@@ -1,4 +1,4 @@
-package view;
+package grupoaravia.gynlog.view;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

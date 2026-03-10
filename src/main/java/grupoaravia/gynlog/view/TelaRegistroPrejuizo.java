@@ -1,4 +1,4 @@
-package view;
+package grupoaravia.gynlog.view;
 
 import java.awt.Color;
 import grupoaravia.gynlog.util.ThemeAdm;

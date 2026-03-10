@@ -1,4 +1,4 @@
-package view;
+package grupoaravia.gynlog.view;
 
 import grupoaravia.gynlog.util.ThemeAdm;
 

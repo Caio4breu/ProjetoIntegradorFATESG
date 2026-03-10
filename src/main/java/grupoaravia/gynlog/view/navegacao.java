@@ -1,4 +1,4 @@
-package view;
+package grupoaravia.gynlog.view;
 
 public class navegacao extends javax.swing.JFrame {
     
